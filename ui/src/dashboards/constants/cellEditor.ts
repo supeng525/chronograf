@@ -20,10 +20,7 @@ export const AXES_SCALE_OPTIONS = {
   BASE_RAW: 'raw',
 }
 
-type DefaultAxis = Pick<
-  Axis,
-  Exclude<keyof Axis, ['bounds', 'tradingHours1', 'tradingHours2']>
->
+type DefaultAxis = Pick<Axis, Exclude<keyof Axis, 'bounds'>>
 
 export const DEFAULT_AXIS: DefaultAxis = {
   prefix: '',
@@ -36,9 +33,6 @@ export const DEFAULT_AXIS: DefaultAxis = {
 export const FULL_DEFAULT_AXIS: Axis = {
   ...DEFAULT_AXIS,
   bounds: ['', ''],
-  // sup test
-  tradingHours1: ['', ''],
-  tradingHours2: ['', ''],
 }
 
 export const DEFAULT_AXES: Axes = {

@@ -7,9 +7,6 @@ export interface Axis {
   suffix: string
   base: string
   scale: string
-  // sup test
-  tradingHours1?: [string, string]
-  tradingHours2?: [string, string]
   bounds?: [string, string]
 }
 

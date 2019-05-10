@@ -148,7 +148,7 @@ class SingleStat extends PureComponent<Props, State> {
   }
 
   private get roundedLastValue(): string {
-    const {decimalPlaces,suffix} = this.props
+    const {decimalPlaces} = this.props
 
     if (this.lastValue === null || this.lastValue === undefined) {
       return `${0}`
@@ -157,13 +157,9 @@ class SingleStat extends PureComponent<Props, State> {
     let roundedValue = `${this.lastValue}`
 
     if (isTruncatedNumber(this.lastValue, decimalPlaces)) {
-      // sup
-      if (suffix === '%') {
-        roundedValue = toFixed(this.lastValue * 100, decimalPlaces)
-      } else {
-        roundedValue = toFixed(this.lastValue, decimalPlaces)
-      }
+      roundedValue = toFixed(this.lastValue, decimalPlaces)
     }
+
     return this.formatToLocale(+roundedValue)
   }
 
