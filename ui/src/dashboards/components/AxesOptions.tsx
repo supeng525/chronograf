@@ -340,7 +340,7 @@ class AxesOptions extends PureComponent<Props, State> {
 
   private handleSetYAxisBoundMin = (min: string): void => {
     const {onUpdateAxes, axes} = this.props
-    console.log('s3',min,min.split(':')[0])
+    //console.log('s3',min,min.split(':')[0])
     const {
       y: {
         bounds: [, max],
