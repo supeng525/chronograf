@@ -554,7 +554,6 @@ const ConnectedTimeMachine = (props: PassedProps & ManualRefreshProps) => {
     <Subscribe to={[TimeMachineContainer]}>
       {(container: TimeMachineContainer) => {
         const {state} = container
-
         return (
           <TimeMachine
             {...props}

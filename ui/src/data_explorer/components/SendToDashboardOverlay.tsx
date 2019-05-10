@@ -388,7 +388,8 @@ const ConnectedSendToDashboardOverlay = (props: PassedProps) => {
           lineColors,
           thresholdsListType,
         }
-
+        // sup test
+        console.log('s11',axes,timeMachineContainer.state.axes)
         return (
           <SendToDashboardOverlay
             {...props}

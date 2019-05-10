@@ -127,13 +127,23 @@ export class TimeMachineContainer extends Container<TimeMachineState> {
     this.localStorageKey = getLocalStorageKey()
 
     const localStorageState = getLocalStorage(this.localStorageKey) || {}
-
+    // console.log('s11',localStorageState)
     let state = {
       ...DEFAULT_STATE(),
       ...localStorageState,
       ...initialState,
     }
+    // sup test  本地数据没有  待验证
+    if (typeof state.axes.x.tradingHours1 === 'undefined') {
+      // console.log('s15',state.axes)
+      state.axes.x.tradingHours1 = ['', '']
+    }
 
+    if (typeof state.axes.x.tradingHours2 === 'undefined') {
+      state.axes.x.tradingHours2 = ['', '']
+    }
+
+    // console.log('s14',state.axes)
     if (getDeep<number>(state, 'queryDrafts.length', 0) === 0) {
       const newEmptyQueryDraft: CellQuery = defaultQueryDraft(
         QueryType.InfluxQL
@@ -142,6 +152,7 @@ export class TimeMachineContainer extends Container<TimeMachineState> {
 
       state = {...state, queryDrafts}
     }
+    // console.log('s15',state.axes)
     return this.setAndPersistState(state)
   }
 
@@ -171,7 +182,6 @@ export class TimeMachineContainer extends Container<TimeMachineState> {
     }
 
     const newDraftScript = `${draftScript}\n  |> filter(fn: (r) => ${body})`
-
     return this.setAndPersistState({draftScript: newDraftScript})
   }
 
@@ -285,7 +295,6 @@ export class TimeMachineContainer extends Container<TimeMachineState> {
   public handleDeleteQuery = (queryID: string) => {
     const {queryDrafts} = this.state
     const updatedQueryDrafts = queryDrafts.filter(query => query.id !== queryID)
-
     return this.setAndPersistState({queryDrafts: updatedQueryDrafts})
   }
 
@@ -384,7 +393,6 @@ export class TimeMachineContainer extends Container<TimeMachineState> {
     if (this.localStorageKey) {
       this.debouncer.call(this.setLocalStorageState, LOCAL_STORAGE_DELAY_MS)
     }
-
     return this.setState(state)
   }
 

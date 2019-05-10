@@ -269,6 +269,7 @@ class DisplayOptions extends Component<Props, State> {
 const ConnectedDisplayOptions = (props: PassedProps) => {
   // TODO: Have individual display option components subscribe directly to
   // relevant props, rather than passing them through here
+  // tslint:disable-next-line:no-console
   return (
     <Subscribe to={[TimeMachineContainer]}>
       {(timeMachineContainer: TimeMachineContainer) => (

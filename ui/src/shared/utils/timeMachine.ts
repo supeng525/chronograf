@@ -132,7 +132,7 @@ export function getLocalStorage(
 
       return {fluxProportions, timeMachineProportions, thresholdsListType}
     }
-
+    //console.log('s13',window.localStorage,data,key)
     return data
   } catch {
     return {}
