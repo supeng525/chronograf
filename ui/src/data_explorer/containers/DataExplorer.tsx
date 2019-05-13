@@ -429,7 +429,6 @@ const ConnectedDataExplorer = (props: PassedProps & WithRouterProps) => {
     <Subscribe to={[TimeMachineContainer]}>
       {(container: TimeMachineContainer) => {
         const {state} = container
-        //console.log('s31',state)
         return (
           <DataExplorer
             {...props}

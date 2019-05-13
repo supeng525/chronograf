@@ -97,6 +97,8 @@ interface State {
   staticLegendHeight: number
   xAxisRange: [number, number]
   isMouseInLegend: boolean
+  // sup test
+  xTradingHours1: [string, string]
 }
 
 @ErrorHandling
@@ -135,6 +137,8 @@ class Dygraph extends Component<Props, State> {
       staticLegendHeight: 0,
       xAxisRange: [0, 0],
       isMouseInLegend: false,
+      // sup test
+      xTradingHours1: ['', ''],
     }
 
     this.graphRef = React.createRef<HTMLDivElement>()
@@ -151,7 +155,7 @@ class Dygraph extends Component<Props, State> {
     )
 
     this.dygraphOptions = options
-    this.setState({xAxisRange: this.dygraph.xAxisRange()})
+    this.setState({xAxisRange: this.dygraph.xAxisRange(),xTradingHours1: this.dygraph.xTradingHours1()})
   }
 
   public componentWillUnmount() {
@@ -421,7 +425,8 @@ class Dygraph extends Component<Props, State> {
   private collectDygraphOptions(): dygraphs.Options {
     const {
       labels,
-      axes: {y},
+      // sup
+      axes: {x,y},
       type,
       underlayCallback,
       isGraphFilled,
@@ -447,7 +452,14 @@ class Dygraph extends Component<Props, State> {
       ylabel: this.getLabel('y'),
       series: colorDygraphSeries,
       plotter: type === CellType.Bar ? barPlotter : null,
+      tradingHours1: x.tradingHours1,
+      tradingHours2: x.tradingHours2,
       axes: {
+        // sup test
+        // x:{
+        //   tradingHours1: x.tradingHours1,
+        //   tradingHours2: x.tradingHours2,
+        // },
         y: {
           axisLabelWidth: labelWidth,
           labelsKMB: y.base === BASE_10,

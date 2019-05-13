@@ -402,8 +402,10 @@ class AxesOptions extends PureComponent<Props, State> {
     // const newAxes = {x: {...axes.x, tradingHours1}, ...axes}
     const newAxes = {...axes, x: {...axes.x, tradingHours1}}
     onUpdateAxes(newAxes)
-    let temp = parseInt(tradingHoursStart1) - parseInt(tradingHoursEnd1)
-    console.log('s2',tradingHours1,temp,new Date(tradingHoursStart1))
+    // sup test
+    // let temp = parseInt(tradingHoursEnd1.split(":")[0]) - parseInt(tradingHoursStart1.split(":")[0])
+    // let temp1 = parseInt(tradingHoursEnd1.split(":")[1]) - parseInt(tradingHoursStart1.split(":")[1])
+    // console.log('s2',tradingHours1,temp,temp1)
   }
   private handleSetXAxisTradingHoursEnd1 = (tradingHoursEnd1: string): void => {
     const {onUpdateAxes, axes} = this.props
@@ -419,7 +421,6 @@ class AxesOptions extends PureComponent<Props, State> {
     // const newAxes = {x: {...axes.x, tradingHours1}, ...axes}
     const newAxes = {...axes, x: {...axes.x, tradingHours1}}
     onUpdateAxes(newAxes)
-    console.log('s3',tradingHours1,newAxes,this.props.axes)
   }
   // sup test
   private handleSetXAxisTradingHoursStart2 = (
@@ -438,7 +439,6 @@ class AxesOptions extends PureComponent<Props, State> {
     // const newAxes = {x: {...axes.x, tradingHours1}, ...axes}
     const newAxes = {...axes, x: {...axes.x, tradingHours2}}
     onUpdateAxes(newAxes)
-    console.log('s4',tradingHours2,newAxes,this.props.axes)
   }
   private handleSetXAxisTradingHoursEnd2 = (tradingHoursEnd2: string): void => {
     const {onUpdateAxes, axes} = this.props
@@ -454,7 +454,6 @@ class AxesOptions extends PureComponent<Props, State> {
     // const newAxes = {x: {...axes.x, tradingHours1}, ...axes}
     const newAxes = {...axes, x: {...axes.x, tradingHours2}}
     onUpdateAxes(newAxes)
-    console.log('s5',tradingHours2,newAxes,this.props.axes)
   }
 
   private handleSetLabel = (label: string): void => {

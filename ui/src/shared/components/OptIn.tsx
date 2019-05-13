@@ -139,6 +139,7 @@ export default class OptIn extends Component<Props, State> {
     } else if (type === 'number') {
       this.setCustomValue(toValueInRange(value, min, max))
     }
+    // sup test
     else if (type === 'time') {
       this.setCustomValue(value)
     }
