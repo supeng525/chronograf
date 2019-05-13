@@ -99,6 +99,7 @@ interface State {
   isMouseInLegend: boolean
   // sup test
   xTradingHours1: [string, string]
+  xTradingHours2: [string, string]
 }
 
 @ErrorHandling
@@ -139,6 +140,7 @@ class Dygraph extends Component<Props, State> {
       isMouseInLegend: false,
       // sup test
       xTradingHours1: ['', ''],
+      xTradingHours2: ['', ''],
     }
 
     this.graphRef = React.createRef<HTMLDivElement>()
@@ -155,7 +157,7 @@ class Dygraph extends Component<Props, State> {
     )
 
     this.dygraphOptions = options
-    this.setState({xAxisRange: this.dygraph.xAxisRange(),xTradingHours1: this.dygraph.xTradingHours1()})
+    this.setState({xAxisRange: this.dygraph.xAxisRange(),xTradingHours1: this.dygraph.xTradingHours1(),xTradingHours2: this.dygraph.xTradingHours2()})
   }
 
   public componentWillUnmount() {
