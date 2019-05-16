@@ -157,7 +157,6 @@ class LineGraph extends PureComponent<LineGraphProps, State> {
     }
 
     const {labels, timeSeries, dygraphSeries} = this.state.timeSeries
-
     const options = {
       rightGap: 0,
       yRangePad: 10,
@@ -172,7 +171,13 @@ class LineGraph extends PureComponent<LineGraphProps, State> {
       stepPlot: type === 'line-stepplot',
       stackedGraph: type === 'line-stacked',
     }
-
+    if (typeof axes.x.tradingHours1 === 'undefined') {
+      axes.x.tradingHours1 = ['','']
+    }
+    if (typeof axes.x.tradingHours2 === 'undefined') {
+      axes.x.tradingHours2 = ['','']
+    }
+    console.log('sup10',axes)
     return (
       <div className="dygraph graph--hasYLabel" style={this.style}>
         {loading === RemoteDataState.Loading && <GraphLoadingDots />}
