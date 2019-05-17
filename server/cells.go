@@ -413,10 +413,18 @@ func (s *Service) ReplaceDashboardCell(w http.ResponseWriter, r *http.Request) {
 	for i, a := range cell.Axes {
 		if len(a.Bounds) == 0 {
 			a.Bounds = []string{"", ""}
+			cell.Axes[i] = a
+		}
+		if len(a.TradingHours1) == 0 {
 			a.TradingHours1 = []string{"", ""}
+			cell.Axes[i] = a
+		}
+		if len(a.TradingHours2) == 0 {
 			a.TradingHours2 = []string{"", ""}
 			cell.Axes[i] = a
 		}
+		
+
 	}
 
 	if err := ValidDashboardCellRequest(&cell); err != nil {

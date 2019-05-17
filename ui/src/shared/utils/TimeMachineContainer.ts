@@ -132,17 +132,16 @@ export class TimeMachineContainer extends Container<TimeMachineState> {
       ...localStorageState,
       ...initialState,
     }
-    // sup test  本地数据没有  待验证
-    if (typeof state.axes.x.tradingHours1 === 'undefined') {
-      // console.log('s15',state.axes)
-      state.axes.x.tradingHours1 = ['', '']
-    }
+    // // sup test  本地数据没有  待验证
+    // if (typeof state.axes.x.tradingHours1 === 'undefined') {
+    //   // console.log('s15',state.axes)
+    //   state.axes.x.tradingHours1 = ['', '']
+    // }
 
-    if (typeof state.axes.x.tradingHours2 === 'undefined') {
-      state.axes.x.tradingHours2 = ['', '']
-    }
+    // if (typeof state.axes.x.tradingHours2 === 'undefined') {
+    //   state.axes.x.tradingHours2 = ['', '']
+    // }
 
-    // console.log('s14',state.axes)
     if (getDeep<number>(state, 'queryDrafts.length', 0) === 0) {
       const newEmptyQueryDraft: CellQuery = defaultQueryDraft(
         QueryType.InfluxQL
@@ -151,7 +150,7 @@ export class TimeMachineContainer extends Container<TimeMachineState> {
 
       state = {...state, queryDrafts}
     }
-    // console.log('s15',state.axes)
+    console.log('s15',state.axes)
     return this.setAndPersistState(state)
   }
 

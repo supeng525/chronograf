@@ -5957,7 +5957,7 @@
           "description":
             "tradingHours1",
           "items": {
-            "type": "time"
+            "type": "string"
           }
         },
         "tradingHours2": {
@@ -5965,7 +5965,7 @@
           "description":
             "tradingHours2",
           "items": {
-            "type": "time"
+            "type": "string"
           }
         },
         "label": {
