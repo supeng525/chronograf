@@ -384,11 +384,9 @@ const getDashboard = (state, dashboardId: number): Dashboard => {
   const dashboard = state.dashboardUI.dashboards.find(
     d => d.id === +dashboardId
   )
-
   if (!dashboard) {
     throw new Error(`Could not find dashboard with id '${dashboardId}'`)
   }
-
   return dashboard
 }
 

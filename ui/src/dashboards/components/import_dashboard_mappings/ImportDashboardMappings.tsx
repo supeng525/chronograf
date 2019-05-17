@@ -46,7 +46,7 @@ class ImportDashboardMappings extends Component<Props, State> {
 
   public componentDidMount() {
     const {cells, importedSources, source} = this.props
-
+    
     if (_.isEmpty(cells)) {
       return
     }

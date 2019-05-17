@@ -109,7 +109,7 @@ class DashboardsPageContents extends Component<Props, State> {
   private get filteredDashboards(): Dashboard[] {
     const {dashboards} = this.props
     const {searchTerm} = this.state
-
+    
     return dashboards.filter(d =>
       d.name.toLowerCase().includes(searchTerm.toLowerCase())
     )

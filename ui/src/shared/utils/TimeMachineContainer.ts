@@ -127,7 +127,6 @@ export class TimeMachineContainer extends Container<TimeMachineState> {
     this.localStorageKey = getLocalStorageKey()
 
     const localStorageState = getLocalStorage(this.localStorageKey) || {}
-    // console.log('s11',localStorageState)
     let state = {
       ...DEFAULT_STATE(),
       ...localStorageState,

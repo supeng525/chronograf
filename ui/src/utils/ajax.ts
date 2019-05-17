@@ -1,4 +1,5 @@
 import axios, {AxiosResponse} from 'axios'
+import config from 'src/shared/reducers/config';
 
 let links
 export const setAJAXLinks = ({updatedLinks}): void => {
@@ -102,7 +103,6 @@ async function AJAX<T = any>(
         ? addBasepath(`${links[resource]}/${id}`, excludeBasepath)
         : addBasepath(`${links[resource]}`, excludeBasepath)
     }
-
     const response = await axios.request<T>({
       url,
       method,
@@ -110,7 +110,6 @@ async function AJAX<T = any>(
       params,
       headers,
     })
-
     // TODO: Just return the unadulterated response without grafting auth, me,
     // and logoutLink onto this object, once those are retrieved via their own
     // AJAX request and action creator.

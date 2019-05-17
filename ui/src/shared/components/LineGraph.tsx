@@ -177,7 +177,6 @@ class LineGraph extends PureComponent<LineGraphProps, State> {
     if (typeof axes.x.tradingHours2 === 'undefined') {
       axes.x.tradingHours2 = ['','']
     }
-    console.log('sup10',axes)
     return (
       <div className="dygraph graph--hasYLabel" style={this.style}>
         {loading === RemoteDataState.Loading && <GraphLoadingDots />}

@@ -5952,6 +5952,22 @@
             "format": "int64"
           }
         },
+        "tradingHours1": {
+          "type": "array",
+          "description":
+            "tradingHours1",
+          "items": {
+            "type": "time"
+          }
+        },
+        "tradingHours2": {
+          "type": "array",
+          "description":
+            "tradingHours2",
+          "items": {
+            "type": "time"
+          }
+        },
         "label": {
           "description": "label is a description of this Axis",
           "type": "string"

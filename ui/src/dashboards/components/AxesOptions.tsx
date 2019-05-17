@@ -165,7 +165,7 @@ class AxesOptions extends PureComponent<Props, State> {
             {this.decimalPlaces}
             {this.staticLegendTabs}
             <div className="form-group col-sm-6">
-              <label htmlFor="TradingHoursStart1">TradingHours Start1</label>
+              <label htmlFor="TradingHoursStart1">TradingHours AM/PM Start</label>
               <OptIn
                 customPlaceholder={'tradingHoursStart1'}
                 customValue={tradingHoursStart1}
@@ -174,7 +174,7 @@ class AxesOptions extends PureComponent<Props, State> {
               />
             </div>
             <div className="form-group col-sm-6">
-              <label htmlFor="TradingHoursEnd1">TradingHours End1</label>
+              <label htmlFor="TradingHoursEnd1">TradingHours AM End</label>
               <OptIn
                 customPlaceholder={'tradingHoursEnd1'}
               customValue={tradingHoursEnd1}
@@ -183,7 +183,7 @@ class AxesOptions extends PureComponent<Props, State> {
               />
             </div>
             <div className="form-group col-sm-6">
-              <label htmlFor="TradingHoursStart2">TradingHours Start2</label>
+              <label htmlFor="TradingHoursStart2">TradingHours PM Start</label>
               <OptIn
                 customPlaceholder={'tradingHoursStart2'}
                 customValue={tradingHoursStart2}
@@ -192,7 +192,7 @@ class AxesOptions extends PureComponent<Props, State> {
               />
             </div>
             <div className="form-group col-sm-6">
-              <label htmlFor="TradingHoursEnd2">TradingHours End2</label>
+              <label htmlFor="TradingHoursEnd2">TradingHours PM End</label>
               <OptIn
                 customPlaceholder={'tradingHoursEnd2'}
               customValue={tradingHoursEnd2}
