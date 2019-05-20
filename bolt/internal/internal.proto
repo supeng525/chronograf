@@ -88,6 +88,8 @@ message Axis {
 	string suffix               = 5; // specifies the suffix for axis values
 	string base                 = 6; // defines the base for axis values
 	string scale                = 7; // represents the magnitude of the numbers on this axis
+	repeated string tradingHours1 =8;
+	repeated string tradingHours2 =9;
 }
 
 message Template {

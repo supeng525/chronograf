@@ -403,9 +403,7 @@ class DashboardPage extends Component<Props, State> {
     newCell: DashboardsModels.Cell | NewDefaultCell
   ): Promise<void> => {
     const {dashboard} = this.props
-    // console.log('sup13',this.props,newCell)
     if (this.isExistingCell(newCell)) {
-      // console.log('sup14',this.props,newCell)
       await this.props.updateDashboardCell(dashboard, newCell)
     } else {
       this.props.addDashboardCellAsync(dashboard, newCell)

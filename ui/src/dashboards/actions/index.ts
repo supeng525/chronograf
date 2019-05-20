@@ -482,7 +482,7 @@ export const updateDashboardCell = (
   cell: Cell | NewDefaultCell
 ) => async (dispatch: Dispatch<Action>): Promise<void> => {
   try {
-    const {data} = await updateDashboardCellAJAX(cell)
+    const {data} = await updateDashboardCellAJAX(cell)// 保存数据
     dispatch(syncDashboardCell(dashboard, data))
   } catch (error) {
     console.error(error)

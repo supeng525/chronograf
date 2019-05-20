@@ -503,6 +503,8 @@ type Axis struct {
 	Suffix       string   `protobuf:"bytes,5,opt,name=suffix,proto3" json:"suffix,omitempty"`
 	Base         string   `protobuf:"bytes,6,opt,name=base,proto3" json:"base,omitempty"`
 	Scale        string   `protobuf:"bytes,7,opt,name=scale,proto3" json:"scale,omitempty"`
+	TradingHours1 []string
+	TradingHours2 []string
 }
 
 func (m *Axis) Reset()                    { *m = Axis{} }
@@ -520,6 +522,19 @@ func (m *Axis) GetLegacyBounds() []int64 {
 func (m *Axis) GetBounds() []string {
 	if m != nil {
 		return m.Bounds
+	}
+	return nil
+}
+//sup
+func (m *Axis) GetTradingHours1() []string {
+	if m != nil {
+		return m.TradingHours1
+	}
+	return nil
+}
+func (m *Axis) GetTradingHours2() []string {
+	if m != nil {
+		return m.TradingHours2
 	}
 	return nil
 }
