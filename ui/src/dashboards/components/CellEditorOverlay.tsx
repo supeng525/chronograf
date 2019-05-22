@@ -264,7 +264,7 @@ class CellEditorOverlay extends Component<Props, State> {
   private handleSaveCell = () => {
     const {onSave, onResetTimeMachine} = this.props
     const cell = this.collectCell()
-    console.log('sup1',cell)
+    // console.log('sup1',cell)
     onSave(cell)
     onResetTimeMachine()
   }

@@ -61,8 +61,8 @@ class AxesOptions extends PureComponent<Props, State> {
       x: {
         bounds: ['', ''],
         // sup test
-        tradingHours1: ['', ''],
-        tradingHours2: ['', ''],
+        tradingHours1: ['09:30', '11:30'],
+        tradingHours2: ['13:00', '15:00'],
         prefix: '',
         suffix: '',
         base: BASE_10,
@@ -103,8 +103,37 @@ class AxesOptions extends PureComponent<Props, State> {
     //   temp = tradingHours1
     // } 
     // sup test
-    const [tradingHoursStart1, tradingHoursEnd1] = tradingHours1
-    const [tradingHoursStart2, tradingHoursEnd2] = tradingHours2
+    // const [tradingHoursStart1, tradingHoursEnd1] = tradingHours1
+    // const [tradingHoursStart2, tradingHoursEnd2] = tradingHours2
+    const [tradingHoursStart1Temp, tradingHoursEnd1Temp] = tradingHours1
+    const [tradingHoursStart2Temp, tradingHoursEnd2Temp] = tradingHours2
+    var tradingHoursStart1 = tradingHoursStart1Temp;
+    var tradingHoursStart2 = tradingHoursStart2Temp;
+    var tradingHoursEnd1 = tradingHoursEnd1Temp;
+    var tradingHoursEnd2 = tradingHoursEnd2Temp;
+    const timeData = {
+      tradingHoursStart1: '09:30',
+      tradingHoursEnd1: '11:30',
+      tradingHoursStart2: '13:00',
+      tradingHoursEnd2: '15:00',
+    }
+    if (tradingHoursStart1 === '') {
+      tradingHoursStart1 = timeData.tradingHoursStart1
+      this.handleSetXAxisTradingHoursStart1(tradingHoursStart1)
+    }
+    if (tradingHoursStart2 === '') {
+      tradingHoursStart2 = timeData.tradingHoursStart2
+      this.handleSetXAxisTradingHoursStart2(tradingHoursStart2)
+    }
+    if (tradingHoursEnd1 === '') {
+      tradingHoursEnd1 = timeData.tradingHoursEnd1
+      this.handleSetXAxisTradingHoursEnd1(tradingHoursEnd1)
+    }
+    if (tradingHoursEnd2 === '') {
+      tradingHoursEnd2 = timeData.tradingHoursEnd2
+      this.handleSetXAxisTradingHoursEnd2(tradingHoursEnd2)
+    }
+    // console.log('sup',tradingHours1)
 
     const {menuOption} = GRAPH_TYPES.find(graph => graph.type === type)
 
@@ -165,7 +194,7 @@ class AxesOptions extends PureComponent<Props, State> {
             {this.decimalPlaces}
             {this.staticLegendTabs}
             <div className="form-group col-sm-6">
-              <label htmlFor="TradingHoursStart1">TradingHours AM/PM Start</label>
+              <label htmlFor="TradingHoursStart1">TradingHours AM Start</label>
               <OptIn
                 customPlaceholder={'tradingHoursStart1'}
                 customValue={tradingHoursStart1}
@@ -176,7 +205,7 @@ class AxesOptions extends PureComponent<Props, State> {
             <div className="form-group col-sm-6">
               <label htmlFor="TradingHoursEnd1">TradingHours AM End</label>
               <OptIn
-                customPlaceholder={'tradingHoursEnd1'}
+              customPlaceholder={'tradingHoursEnd1'}
               customValue={tradingHoursEnd1}
               onSetValue={this.handleSetXAxisTradingHoursEnd1}
               type="time"
@@ -194,7 +223,7 @@ class AxesOptions extends PureComponent<Props, State> {
             <div className="form-group col-sm-6">
               <label htmlFor="TradingHoursEnd2">TradingHours PM End</label>
               <OptIn
-                customPlaceholder={'tradingHoursEnd2'}
+              customPlaceholder={'tradingHoursEnd2'}
               customValue={tradingHoursEnd2}
               onSetValue={this.handleSetXAxisTradingHoursEnd2}
               type="time"
@@ -319,7 +348,6 @@ class AxesOptions extends PureComponent<Props, State> {
     // if (type !== CellType.LinePlusSingleStat) {
     //   return null
     // }
-
     return (
       <GraphOptionsDecimalPlaces
         digits={decimalPlaces.digits}

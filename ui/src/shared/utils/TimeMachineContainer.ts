@@ -140,6 +140,7 @@ export class TimeMachineContainer extends Container<TimeMachineState> {
       const queryDrafts = [newEmptyQueryDraft]
 
       state = {...state, queryDrafts}
+      //console.log('sup',state)
     }  
     return this.setAndPersistState(state)
   }

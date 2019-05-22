@@ -37,8 +37,8 @@ export const FULL_DEFAULT_AXIS: Axis = {
   ...DEFAULT_AXIS,
   bounds: ['', ''],
   // sup test
-  tradingHours1: ['', ''],
-  tradingHours2: ['', ''],
+  tradingHours1: ['09:30', '11:30'],
+  tradingHours2: ['13:00', '15:00'],
 }
 
 export const DEFAULT_AXES: Axes = {

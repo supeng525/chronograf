@@ -44,7 +44,7 @@ export default class OptIn extends Component<Props, State> {
   constructor(props) {
     super(props)
 
-    const {customValue, fixedValue} = props
+    const {customValue, fixedValue,type} = props
 
     this.state = {
       useCustomValue: customValue !== '',
@@ -59,7 +59,10 @@ export default class OptIn extends Component<Props, State> {
   public render() {
     const {fixedPlaceholder, customPlaceholder, type, min, max} = this.props
     const {useCustomValue, customValue} = this.state
-
+    // if(type === 'time' && customValue === '')
+    // {
+    //   this.useFixedValue()
+    // }
     return (
       <div
         className={classnames('opt-in', {
@@ -101,9 +104,25 @@ export default class OptIn extends Component<Props, State> {
   }
 
   private useFixedValue = (): void => {
-    this.setState({useCustomValue: false, customValue: ''}, () =>
-      this.setValue()
-    )
+    // sup test
+    const timeData = {
+      tradingHoursStart1: '09:30',
+      tradingHoursEnd1: '11:30',
+      tradingHoursStart2: '13:00',
+      tradingHoursEnd2: '15:00',
+    }
+    const {customPlaceholder, type,customValue} = this.props
+    var customValueTemp = '';
+    if (type === 'time') {
+      customValueTemp = timeData[customPlaceholder]
+      this.setState({useCustomValue: false, customValue: customValueTemp}, () =>
+        this.setValue()
+      )
+    }else {
+      this.setState({useCustomValue: false, customValue: ''}, () =>
+        this.setValue()
+      )
+    }
   }
 
   private useCustomValue = (): void => {
@@ -131,7 +150,6 @@ export default class OptIn extends Component<Props, State> {
   ): void => {
     const {min, max, type} = this.props
     const {value} = e.target
-
     if (value === '') {
       this.setCustomValue('')
     } else if (type === 'text') {

@@ -177,6 +177,31 @@ class LineGraph extends PureComponent<LineGraphProps, State> {
     if (typeof axes.x.tradingHours2 === 'undefined') {
       axes.x.tradingHours2 = ['','']
     }
+    const [tradingHoursStart1, tradingHoursEnd1] = axes.x.tradingHours1
+    const [tradingHoursStart2, tradingHoursEnd2] = axes.x.tradingHours2
+    // var tradingHoursStart1 = tradingHoursStart1Temp;
+    // var tradingHoursStart2 = tradingHoursStart2Temp;
+    // var tradingHoursEnd1 = tradingHoursEnd1Temp;
+    // var tradingHoursEnd2 = tradingHoursEnd2Temp;
+    const timeData = {
+      tradingHoursStart1: '09:30',
+      tradingHoursEnd1: '11:30',
+      tradingHoursStart2: '13:00',
+      tradingHoursEnd2: '15:00',
+    }
+    if (tradingHoursStart1 === '') {
+      this.props.axes.x.tradingHours1[0] = timeData.tradingHoursStart1
+    }
+    if (tradingHoursStart2 === '') {
+      this.props.axes.x.tradingHours2[0] = timeData.tradingHoursStart2
+    }
+    if (tradingHoursEnd1 === '') {
+      this.props.axes.x.tradingHours1[1] = timeData.tradingHoursEnd1
+    }
+    if (tradingHoursEnd2 === '') {
+      this.props.axes.x.tradingHours2[1] = timeData.tradingHoursEnd2
+    }
+    // console.log('sup11',axes.x)
     return (
       <div className="dygraph graph--hasYLabel" style={this.style}>
         {loading === RemoteDataState.Loading && <GraphLoadingDots />}
