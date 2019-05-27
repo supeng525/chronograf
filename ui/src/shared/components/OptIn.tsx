@@ -222,8 +222,36 @@ export default class OptIn extends Component<Props, State> {
         var customValueTemp = customValue
         if(customValue === '0'){
           customValueTemp = timeData[customPlaceholder]
-          this.setState({useCustomValue: true, customValue: customValueTemp})
         }
+        // console.log('sup',useCustomValue,customPlaceholder,customValue)
+        switch(customPlaceholder){
+          case 'tradingHoursStart1':
+            if(customValue >='12:00'){
+              customValueTemp = timeData[customPlaceholder]
+            }
+            break;
+          case 'tradingHoursEnd1':
+            if(customValue >='12:00'){
+              customValueTemp = timeData[customPlaceholder]
+            }
+            break;
+          case 'tradingHoursStart2':
+            if(customValue <'12:00'){
+              customValueTemp = timeData[customPlaceholder]
+            }
+            break;
+          case 'tradingHoursEnd2':
+            if(customValue <'12:00'){
+              customValueTemp = timeData[customPlaceholder]
+            }
+            break;
+          case 'tradingHoursStart3':
+            if(customValue <'12:00'){
+              customValueTemp = '21:00'
+            }
+            break;
+        }
+        this.setState({useCustomValue: true, customValue: customValueTemp})
         onSetValue(customValueTemp)
       } else {
         onSetValue(customValue)

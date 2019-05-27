@@ -22,7 +22,7 @@ export const AXES_SCALE_OPTIONS = {
 
 type DefaultAxis = Pick<
   Axis,
-  Exclude<keyof Axis, ['bounds', 'tradingHours1', 'tradingHours2']>
+  Exclude<keyof Axis, ['bounds', 'tradingHours1', 'tradingHours2','tradingHours3']>
 >
 
 export const DEFAULT_AXIS: DefaultAxis = {
@@ -39,6 +39,7 @@ export const FULL_DEFAULT_AXIS: Axis = {
   // sup test
   tradingHours1: ['09:30', '11:30'],
   tradingHours2: ['13:00', '15:00'],
+  tradingHours3: ['', ''],
 }
 
 export const DEFAULT_AXES: Axes = {

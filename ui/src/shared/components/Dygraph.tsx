@@ -100,6 +100,7 @@ interface State {
   // sup test
   xTradingHours1: [string, string]
   xTradingHours2: [string, string]
+  xTradingHours3: [string, string]
 }
 
 @ErrorHandling
@@ -110,12 +111,14 @@ class Dygraph extends Component<Props, State> {
         bounds: [null, null],
         tradingHours1: [null,null],
         tradingHours2: [null,null],
+        tradingHours3: [null,null],
         ...DEFAULT_AXIS,
       },
       y: {
         bounds: [null, null],
         tradingHours1: [null,null],
         tradingHours2: [null,null],
+        tradingHours3: [null,null],
         ...DEFAULT_AXIS,
       },
     },
@@ -141,6 +144,7 @@ class Dygraph extends Component<Props, State> {
       // sup test
       xTradingHours1: ['', ''],
       xTradingHours2: ['', ''],
+      xTradingHours3: ['', ''],
     }
 
     this.graphRef = React.createRef<HTMLDivElement>()
@@ -157,7 +161,7 @@ class Dygraph extends Component<Props, State> {
     )
 
     this.dygraphOptions = options
-    this.setState({xAxisRange: this.dygraph.xAxisRange(),xTradingHours1: this.dygraph.xTradingHours1(),xTradingHours2: this.dygraph.xTradingHours2()})
+    this.setState({xAxisRange: this.dygraph.xAxisRange(),xTradingHours1: this.dygraph.xTradingHours1(),xTradingHours2: this.dygraph.xTradingHours2(),xTradingHours3: this.dygraph.xTradingHours3()})
   }
 
   public componentWillUnmount() {
@@ -456,6 +460,7 @@ class Dygraph extends Component<Props, State> {
       plotter: type === CellType.Bar ? barPlotter : null,
       tradingHours1: x.tradingHours1,
       tradingHours2: x.tradingHours2,
+      tradingHours3: x.tradingHours3,
       axes: {
         // sup test
         // x:{

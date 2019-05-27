@@ -177,8 +177,12 @@ class LineGraph extends PureComponent<LineGraphProps, State> {
     if (typeof axes.x.tradingHours2 === 'undefined') {
       axes.x.tradingHours2 = ['','']
     }
+    if (typeof axes.x.tradingHours3 === 'undefined') {
+      axes.x.tradingHours3 = ['','']
+    }
     const [tradingHoursStart1, tradingHoursEnd1] = axes.x.tradingHours1
     const [tradingHoursStart2, tradingHoursEnd2] = axes.x.tradingHours2
+    const [tradingHoursStart3, tradingHoursEnd3] = axes.x.tradingHours3
     // var tradingHoursStart1 = tradingHoursStart1Temp;
     // var tradingHoursStart2 = tradingHoursStart2Temp;
     // var tradingHoursEnd1 = tradingHoursEnd1Temp;

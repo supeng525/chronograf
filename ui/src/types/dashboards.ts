@@ -10,6 +10,7 @@ export interface Axis {
   // sup test
   tradingHours1?: [string, string]
   tradingHours2?: [string, string]
+  tradingHours3?: [string, string]// 夜盘
   bounds?: [string, string]
 }
 
