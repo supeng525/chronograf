@@ -395,7 +395,6 @@ class Dygraph extends Component<Props, State> {
         y: {prefix, suffix},
       },
     } = this.props
-
     return numberValueFormatter(yval, opts, prefix, suffix)
   }
 

@@ -66,7 +66,6 @@ export const numberValueFormatter = (
   }
 
   let label
-
   // switch to scientific notation if we underflow or overflow fixed display.
   if (
     x !== 0.0 &&
@@ -77,7 +76,6 @@ export const numberValueFormatter = (
   } else {
     label = `${roundNum(x, digits)}`
   }
-
   if (kmb || kmg2) {
     let k
     let kLabels = []
