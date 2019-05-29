@@ -90,6 +90,7 @@ message Axis {
 	string scale                = 7; // represents the magnitude of the numbers on this axis
 	repeated string tradingHours1 =8;
 	repeated string tradingHours2 =9;
+	repeated string tradingHours3 =10;
 }
 
 message Template {

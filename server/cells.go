@@ -53,6 +53,9 @@ func newCellResponse(dID chronograf.DashboardID, cell chronograf.DashboardCell) 
 		if len(v.TradingHours2) == 0 {
 			v.TradingHours2 = []string{"", ""}
 		}
+		if len(v.TradingHours3) == 0 {
+			v.TradingHours3 = []string{"", ""}
+		}
 		newAxes[k] = v
 	}
 
@@ -63,6 +66,7 @@ func newCellResponse(dID chronograf.DashboardID, cell chronograf.DashboardCell) 
 				Bounds: []string{"", ""},
 				TradingHours1: []string{"", ""},
 				TradingHours2: []string{"", ""},
+				TradingHours3: []string{"", ""},
 			}
 		}
 	}
@@ -421,6 +425,10 @@ func (s *Service) ReplaceDashboardCell(w http.ResponseWriter, r *http.Request) {
 		}
 		if len(a.TradingHours2) == 0 {
 			a.TradingHours2 = []string{"", ""}
+			cell.Axes[i] = a
+		}
+		if len(a.TradingHours3) == 0 {
+			a.TradingHours3 = []string{"", ""}
 			cell.Axes[i] = a
 		}
 		

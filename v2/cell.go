@@ -289,6 +289,7 @@ type Axis struct {
 	Scale        string   `json:"scale"`  // Scale is the axis formatting scale. Supported: "log", "linear"
 	TradingHours1 []string `json:"tradingHours1"`
 	TradingHours2 []string `json:"tradingHours2"`
+	TradingHours3 []string `json:"tradingHours3"`
 }
 
 // CellColor represents the encoding of data into visualizations

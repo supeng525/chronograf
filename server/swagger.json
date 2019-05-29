@@ -5968,6 +5968,14 @@
             "type": "string"
           }
         },
+        "tradingHours3": {
+          "type": "array",
+          "description":
+            "tradingHours3",
+          "items": {
+            "type": "string"
+          }
+        },
         "label": {
           "description": "label is a description of this Axis",
           "type": "string"

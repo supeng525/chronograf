@@ -505,6 +505,7 @@ type Axis struct {
 	Scale        string   `protobuf:"bytes,7,opt,name=scale,proto3" json:"scale,omitempty"`
 	TradingHours1 []string
 	TradingHours2 []string
+	TradingHours3 []string
 }
 
 func (m *Axis) Reset()                    { *m = Axis{} }
@@ -535,6 +536,12 @@ func (m *Axis) GetTradingHours1() []string {
 func (m *Axis) GetTradingHours2() []string {
 	if m != nil {
 		return m.TradingHours2
+	}
+	return nil
+}
+func (m *Axis) GetTradingHours3() []string {
+	if m != nil {
+		return m.TradingHours3
 	}
 	return nil
 }

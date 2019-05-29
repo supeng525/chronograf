@@ -171,6 +171,7 @@ class LineGraph extends PureComponent<LineGraphProps, State> {
       stepPlot: type === 'line-stepplot',
       stackedGraph: type === 'line-stacked',
     }
+    console.log('sup',axes.x)
     if (typeof axes.x.tradingHours1 === 'undefined') {
       axes.x.tradingHours1 = ['','']
     }

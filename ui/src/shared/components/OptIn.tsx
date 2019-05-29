@@ -110,20 +110,25 @@ export default class OptIn extends Component<Props, State> {
       tradingHoursEnd1: '11:30',
       tradingHoursStart2: '13:00',
       tradingHoursEnd2: '15:00',
+      tradingHoursStart3: '21:00',
+      tradingHoursEnd3: '23:00',
     }
-    const {customPlaceholder, type, customValue} = this.props
+    const {customPlaceholder, type} = this.props
     const {useCustomValue} = this.state
     if (type === 'time') {
       if (!useCustomValue) {
-        // supp test
-        var customValueTemp = timeData[customPlaceholder]
-        this.setState({useCustomValue: true, customValue: customValueTemp}, () =>
-        this.setValue())
+        // sup test
+        const customValueTemp = timeData[customPlaceholder]
+        this.setState(
+          {useCustomValue: true, customValue: customValueTemp},
+          () => this.setValue()
+        )
       } else {
         this.setState({useCustomValue: false, customValue: '0'}, () =>
-        this.setValue())
-      } 
-    }else {
+          this.setValue()
+        )
+      }
+    } else {
       this.setState({useCustomValue: false, customValue: ''}, () =>
         this.setValue()
       )
@@ -207,56 +212,46 @@ export default class OptIn extends Component<Props, State> {
   }
 
   private setValue = (): void => {
-    const {onSetValue,type,customPlaceholder} = this.props
+    const {onSetValue, type, customPlaceholder} = this.props
     const {useCustomValue, fixedValue, customValue} = this.state
     const timeData = {
       tradingHoursStart1: '09:30',
       tradingHoursEnd1: '11:30',
       tradingHoursStart2: '13:00',
       tradingHoursEnd2: '15:00',
+      tradingHoursStart3: '21:00',
+      tradingHoursEnd3: '23:00',
     }
     // sup test
     // console.log('sup1',type,useCustomValue,customValue)
-    if (type === 'time'){
+    if (type === 'time') {
       if (useCustomValue) {
         var customValueTemp = customValue
-        if(customValue === '0'){
+        if (customValue === '0') {
           customValueTemp = timeData[customPlaceholder]
         }
         // console.log('sup',useCustomValue,customPlaceholder,customValue)
-        switch(customPlaceholder){
+        switch (customPlaceholder) {
           case 'tradingHoursStart1':
-            if(customValue >='12:00'){
-              customValueTemp = timeData[customPlaceholder]
-            }
-            break;
           case 'tradingHoursEnd1':
-            if(customValue >='12:00'){
+            if (customValue >= '12:00') {
               customValueTemp = timeData[customPlaceholder]
             }
-            break;
+            break
           case 'tradingHoursStart2':
-            if(customValue <'12:00'){
-              customValueTemp = timeData[customPlaceholder]
-            }
-            break;
           case 'tradingHoursEnd2':
-            if(customValue <'12:00'){
+          case 'tradingHoursStart3':
+            if (customValue < '12:00') {
               customValueTemp = timeData[customPlaceholder]
             }
-            break;
-          case 'tradingHoursStart3':
-            if(customValue <'12:00'){
-              customValueTemp = '21:00'
-            }
-            break;
+            break
         }
         this.setState({useCustomValue: true, customValue: customValueTemp})
         onSetValue(customValueTemp)
       } else {
         onSetValue(customValue)
       }
-    }else{
+    } else {
       if (useCustomValue) {
         onSetValue(customValue)
       } else {
