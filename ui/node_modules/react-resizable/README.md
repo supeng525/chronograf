@@ -2,7 +2,7 @@
 
 [View the Demo](https://strml.github.io/react-resizable/examples/1.html)
 
-A simple widget that can be resized via a handle.
+A simple widget that can be resized via one or more handles.
 
 You can either use the `<Resizable>` element directly, or use the much simpler `<ResizableBox>` element.
 
@@ -50,6 +50,8 @@ These props apply to both `<Resizable>` and `<ResizableBox>`.
   children: React.Element<any>,
   width: number,
   height: number,
+  // Either a ReactElement to be used as handle, or a function returning an element that is fed the handle's location as its first argument.
+  handle: ReactElement<any> | (resizeHandle: 's' | 'w' | 'e' | 'n' | 'sw' | 'nw' | 'se' | 'ne') => ReactElement<any>,
   // If you change this, be sure to update your css
   handleSize: [number, number] = [10, 10],
   lockAspectRatio: boolean = false,
@@ -59,6 +61,7 @@ These props apply to both `<Resizable>` and `<ResizableBox>`.
   onResizeStop?: ?(e: SyntheticEvent, data: ResizeCallbackData) => any,
   onResizeStart?: ?(e: SyntheticEvent, data: ResizeCallbackData) => any,
   onResize?: ?(e: SyntheticEvent, data: ResizeCallbackData) => any,
-  draggableOpts?: ?Object
+  draggableOpts?: ?Object,
+  resizeHandles?: ?Array<'s' | 'w' | 'e' | 'n' | 'sw' | 'nw' | 'se' | 'ne'> = ['se']
 };
 ```

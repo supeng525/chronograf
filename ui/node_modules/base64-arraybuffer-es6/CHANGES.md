@@ -1,5 +1,15 @@
 # base64-arraybuffer-es6
 
+## 0.5.0
+
+- Breaking change: Drop yarn
+- Linting: Switch away from deprecated no-extension `.eslintrc` to add `.js`
+- Testing: Switch from nodeunit to Mocha/Chai
+- Testing: Use CLI instead of programmatic server; use open-cli to open file
+- Build: Add browserslist
+- npm: Add `core-js-bundle` to `peerDependencies`
+- npm: Update devDeps
+
 ## 0.4.2
 
 - Fix: Overcome Safari's idiosyncrasies with `Uint8Array` constructor
