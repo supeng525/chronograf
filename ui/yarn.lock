@@ -8846,9 +8846,9 @@ sisteransi@^0.1.1:
   integrity sha512-PmGOd02bM9YO5ifxpw36nrNMBTptEtfRl4qUYl9SndkolplkrZZOW7PGHjrZL53QvMVj9nQ+TKqUnRsw4tJa4g==
 
 size-sensor@^0.2.0:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/size-sensor/-/size-sensor-0.2.4.tgz#93f7b3a8a8582967a1ae782c5ae39ae1dbb7368d"
-  integrity sha512-HClRjgxoco4IV3UaMYfzhP+xssA4bD/4bm8bFUH55K2AmjplwWlWZCFnSjkBoN35JdD1kKbOpyf9df+DZspdOA==
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/size-sensor/-/size-sensor-0.2.5.tgz#e8ffb7cc5258893472bfda4f5734d66583247757"
+  integrity sha512-Rip8d6LmCHIBUY5iIS3nKln1X4bF8260oFI4suo6MX+vOV/aNpNWYKTyjamSJMbxP17qMlR0DmGXFEio3BYJUg==
 
 slash@^1.0.0:
   version "1.0.0"
