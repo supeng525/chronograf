@@ -25,7 +25,7 @@ class RadioButton extends Component<Props> {
 
   public render() {
     const {children, disabled} = this.props
-
+    // console.log('sup',this.handleClick,this.title)
     return (
       <button
         type="button"

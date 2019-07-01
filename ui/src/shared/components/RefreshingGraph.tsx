@@ -17,6 +17,8 @@ import TableGraphTransform from 'src/shared/components/TableGraphTransform'
 import TableGraphFormat from 'src/shared/components/TableGraphFormat'
 import AutoRefresh from 'src/shared/components/AutoRefresh'
 import InvalidData from 'src/shared/components/InvalidData'
+// sup test
+import CustomGraph from 'src/shared/components/CustomGraph'
 
 // Constants
 import {emptyGraphCopy} from 'src/shared/copy/cell'
@@ -53,6 +55,7 @@ import {
   FieldOption,
   DecimalPlaces,
   NoteVisibility,
+  ThresholdType,
 } from 'src/types/dashboards'
 import {GrabDataForDownloadHandler} from 'src/types/layout'
 import {TimeSeriesServerResponse} from 'src/types/series'
@@ -235,7 +238,6 @@ class RefreshingGraph extends Component<Props> {
                         />
                       )
                     }
-
                     switch (type) {
                       case CellType.SingleStat:
                         return this.singleStat(
@@ -252,6 +254,15 @@ class RefreshingGraph extends Component<Props> {
                         )
                       case CellType.Gauge:
                         return this.gauge(timeSeriesInfluxQL, timeSeriesFlux)
+                      // sup test
+                      case CellType.Custom:
+                        return this.customGraph(
+                          timeSeriesInfluxQL,
+                          timeSeriesFlux,
+                          uuid,
+                          width,
+                          height
+                        )
                       default:
                         return this.lineGraph(
                           timeSeriesInfluxQL,
@@ -364,7 +375,6 @@ class RefreshingGraph extends Component<Props> {
       editorLocation,
       onUpdateFieldOptions,
     } = this.props
-
     const {dataType, data} = this.getTypeAndData(influxQLData, fluxData)
     if (dataType === DataType.flux) {
       return (
@@ -386,7 +396,7 @@ class RefreshingGraph extends Component<Props> {
         />
       )
     }
-
+    // console.log('sup1',data,colors)
     return (
       <TableGraphTransform
         data={data as TimeSeriesServerResponse[]}
@@ -499,6 +509,88 @@ class RefreshingGraph extends Component<Props> {
         onUpdateVisType={onUpdateVisType}
         handleSetHoverTime={handleSetHoverTime}
       />
+    )
+  }
+  // sup test
+  private customGraph = (
+    influxQLData: TimeSeriesServerResponse[],
+    fluxData: FluxTable[],
+    uuid: string,
+    width: number,
+    height: number
+  ): JSX.Element => {
+    const {
+      colors,
+      fieldOptions,
+      timeFormat,
+      tableOptions,
+      decimalPlaces,
+      manualRefresh,
+      handleSetHoverTime,
+      editorLocation,
+      onUpdateFieldOptions,
+    } = this.props
+
+    const {dataType, data} = this.getTypeAndData(influxQLData, fluxData)
+    if (dataType === DataType.flux) {
+      return (
+        <TimeMachineTables
+          data={data as FluxTable[]}
+          uuid={uuid}
+          dataType={dataType}
+          colors={colors}
+          width={width}
+          height={height}
+          key={manualRefresh}
+          tableOptions={tableOptions}
+          fieldOptions={fieldOptions}
+          timeFormat={timeFormat}
+          decimalPlaces={decimalPlaces}
+          editorLocation={editorLocation}
+          handleSetHoverTime={handleSetHoverTime}
+          onUpdateFieldOptions={onUpdateFieldOptions}
+        />
+      )
+    }
+    // console.log('sup2',data,colors)
+    return (
+      <TableGraphTransform
+        data={data as TimeSeriesServerResponse[]}
+        uuid={uuid}
+        dataType={dataType}
+      >
+        {(transformedData, nextUUID) => (
+          <TableGraphFormat
+            data={transformedData}
+            uuid={nextUUID}
+            dataType={dataType}
+            tableOptions={tableOptions}
+            fieldOptions={fieldOptions}
+            timeFormat={timeFormat}
+            decimalPlaces={decimalPlaces}
+          >
+            {(formattedData,sort, computedFieldOptions, onSort) => (
+              <CustomGraph
+                data={formattedData}
+                // sup test
+                dataCustom={transformedData.dataCustom}
+                sort={sort}
+                onSort={onSort}
+                dataType={dataType}
+                colors={colors}
+                key={manualRefresh}
+                tableOptions={tableOptions}
+                fieldOptions={computedFieldOptions}
+                timeFormat={timeFormat}
+                decimalPlaces={decimalPlaces}
+                editorLocation={editorLocation}
+                handleSetHoverTime={handleSetHoverTime}
+                onUpdateFieldOptions={onUpdateFieldOptions}
+              />
+            )}
+          </TableGraphFormat>
+        )}
+      </TableGraphTransform>
     )
   }
 

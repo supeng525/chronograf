@@ -5,7 +5,6 @@ import Dygraph from 'src/shared/components/Dygraph'
 import {withRouter, RouteComponentProps} from 'react-router'
 import memoizeOne from 'memoize-one'
 
-
 // Components
 import SingleStat from 'src/shared/components/SingleStat'
 import {ErrorHandlingWith} from 'src/shared/decorators/errors'
@@ -110,6 +109,7 @@ class LineGraph extends PureComponent<LineGraphProps, State> {
 
       timeSeries = result
 
+
       if (!this.isComponentMounted || uuid !== this.latestUUID) {
         return
       }
@@ -173,13 +173,13 @@ class LineGraph extends PureComponent<LineGraphProps, State> {
     }
     // console.log('sup',axes.x)
     if (typeof axes.x.tradingHours1 === 'undefined') {
-      axes.x.tradingHours1 = ['','']
+      axes.x.tradingHours1 = ['', '']
     }
     if (typeof axes.x.tradingHours2 === 'undefined') {
-      axes.x.tradingHours2 = ['','']
+      axes.x.tradingHours2 = ['', '']
     }
     if (typeof axes.x.tradingHours3 === 'undefined') {
-      axes.x.tradingHours3 = ['','']
+      axes.x.tradingHours3 = ['', '']
     }
     const [tradingHoursStart1, tradingHoursEnd1] = axes.x.tradingHours1
     const [tradingHoursStart2, tradingHoursEnd2] = axes.x.tradingHours2
@@ -206,7 +206,8 @@ class LineGraph extends PureComponent<LineGraphProps, State> {
     if (tradingHoursEnd2 === '') {
       this.props.axes.x.tradingHours2[1] = timeData.tradingHoursEnd2
     }
-    // console.log('sup11',axes.x)
+    // console.log('sup11',timeSeries,dygraphSeries,options)
+
     return (
       <div className="dygraph graph--hasYLabel" style={this.style}>
         {loading === RemoteDataState.Loading && <GraphLoadingDots />}

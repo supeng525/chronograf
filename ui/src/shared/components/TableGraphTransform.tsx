@@ -31,13 +31,16 @@ interface Props {
   dataType: DataType
   children: (
     data: TimeSeriesToTableGraphReturnType,
-    uuid: string
+    uuid: string,
+    // customPrice: TimeSeriesToTableGraphReturnType
   ) => JSX.Element
 }
 
 interface State {
   transformedData: TimeSeriesToTableGraphReturnType
   invalidDataError: ErrorTypes
+  // sup test  设置标的价格
+  // customPrice: TimeSeriesToTableGraphReturnType
 }
 
 class TableGraphTransform extends PureComponent<Props, State> {
@@ -50,10 +53,16 @@ class TableGraphTransform extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props)
 
-    this.state = {transformedData: null, invalidDataError: null}
+    this.state = {
+      transformedData: null,
+      invalidDataError: null,
+      // sup test
+      // customPrice: null,
+    }
   }
 
   public render() {
+    // console.log('sup2',this.state)
     if (this.state.invalidDataError) {
       return (
         <InvalidData
@@ -61,12 +70,17 @@ class TableGraphTransform extends PureComponent<Props, State> {
         />
       )
     }
+    // console.log('sup3',this.state)
 
     if (!this.state.transformedData) {
       return null
     }
-
-    return this.props.children(this.state.transformedData, uuid.v4())
+    // sup test
+    return this.props.children(
+      this.state.transformedData,
+      uuid.v4(),
+      // this.state.customPrice
+    )
   }
 
   public componentDidMount() {
@@ -85,19 +99,23 @@ class TableGraphTransform extends PureComponent<Props, State> {
   }
 
   private async transformData() {
-    const {dataType, data} = this.props
-
+    const {dataType, data} = this.props  
     if (dataType === DataType.influxQL) {
+      // console.log('sup1',data,dataType) 
       try {
         const influxQLData = await this.memoizedTimeSeriesToTableGraph(
           data as TimeSeriesServerResponse[]
-        )
-
+        ) 
+        // console.log('sup2',data,dataType)    
         if (!this.isComponentMounted) {
           return
         }
-
-        this.setState({transformedData: influxQLData, invalidDataError: null})
+        // const data1 = data as TimeSeriesServerResponse[]
+        this.setState({
+          transformedData: influxQLData,
+          invalidDataError: null,
+          // customPrice: customPriceData,
+        })
       } catch (err) {
         let invalidDataError: ErrorTypes
         switch (err.toString()) {
@@ -129,6 +147,9 @@ class TableGraphTransform extends PureComponent<Props, State> {
       data: TimeSeriesValue[][]
       sortedLabels: Label[]
       influxQLQueryType: null
+      // sup
+      dataCustom:TimeSeriesValue[][]
+      sortedLabelsCustom: Label[]
     }
 
     if (!this.isComponentMounted) {

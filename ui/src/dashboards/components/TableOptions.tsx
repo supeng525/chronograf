@@ -15,12 +15,13 @@ import ThresholdsListTypeToggle from 'src/shared/components/ThresholdsListTypeTo
 
 // Constants
 import {DEFAULT_INFLUXQL_TIME_FIELD} from 'src/dashboards/constants'
+import {GRAPH_TYPES} from 'src/dashboards/graphics/graph'
 
 // Decorators
 import {ErrorHandling} from 'src/shared/decorators/errors'
 
 // Types
-import {DecimalPlaces, ThresholdType} from 'src/types/dashboards'
+import {DecimalPlaces, ThresholdType, CellType} from 'src/types/dashboards'
 import {QueryConfig} from 'src/types/queries'
 import {ColorNumber} from 'src/types/colors'
 
@@ -42,6 +43,7 @@ interface TableOptionsInterface {
 }
 
 interface Props {
+  type: string
   queryConfigs: QueryConfig[]
   onUpdateTableOptions: (options: TableOptionsInterface) => void
   onUpdateFieldOptions: (fieldOptions: RenamableField[]) => void
@@ -77,63 +79,100 @@ export class TableOptions extends Component<Props, {}> {
       thresholdsListType,
       thresholdsListColors,
       onUpdateThresholdsListType,
+      type,
     } = this.props
 
     const tableSortByOptions = fieldOptions.map(field => ({
       key: field.internalName,
       text: field.displayName || field.internalName,
     }))
-
-    return (
-      <FancyScrollbar className="display-options" autoHide={false}>
-        <div className="display-options--wrapper">
-          <h5 className="display-options--header">Table Controls</h5>
-          <div className="form-group-wrapper">
-            <GraphOptionsSortBy
-              selected={tableOptions.sortBy || DEFAULT_INFLUXQL_TIME_FIELD}
-              sortByOptions={tableSortByOptions}
-              onChooseSortBy={this.handleChooseSortBy}
-            />
-            <GraphOptionsDecimalPlaces
-              digits={decimalPlaces.digits}
-              isEnforced={decimalPlaces.isEnforced}
-              onDecimalPlacesChange={this.handleDecimalPlacesChange}
-            />
-            <GraphOptionsTimeAxis
-              verticalTimeAxis={verticalTimeAxis}
-              onToggleVerticalTimeAxis={this.handleToggleVerticalTimeAxis}
-            />
-            <GraphOptionsTimeFormat
-              timeFormat={timeFormat}
-              onTimeFormatChange={this.handleTimeFormatChange}
-            />
-            <GraphOptionsFixFirstColumn
-              fixed={fixFirstColumn}
-              onToggleFixFirstColumn={this.handleToggleFixFirstColumn}
-            />
-          </div>
-          <GraphOptionsCustomizeFields
-            fields={fieldOptions}
-            onFieldUpdate={this.handleFieldUpdate}
-            moveField={this.moveField}
-          />
-          <ThresholdsList
-            showListHeading={true}
-            onResetFocus={onResetFocus}
-            thresholdsListType={thresholdsListType}
-            thresholdsListColors={thresholdsListColors}
-            onUpdateThresholdsListColors={onUpdateThresholdsListColors}
-          />
-          <div className="form-group-wrapper graph-options-group">
-            <ThresholdsListTypeToggle
-              containerClass="form-group col-xs-6"
-              thresholdsListType={thresholdsListType}
-              onUpdateThresholdsListType={onUpdateThresholdsListType}
-            />
-          </div>
-        </div>
-      </FancyScrollbar>
-    )
+    const {menuOption} = GRAPH_TYPES.find(graph => graph.type === type)
+    switch (type) {
+      case CellType.Custom:
+        // 去掉时间
+        let fieldOptionsCustom = fieldOptions.slice(1,fieldOptions.length) 
+        return (
+          <FancyScrollbar className="display-options" autoHide={false}>
+            <div className="display-options--wrapper">
+              <h5 className="display-options--header">{menuOption} Controls</h5>
+              <div className="form-group-wrapper">
+                <GraphOptionsTimeAxis
+                  verticalTimeAxis={verticalTimeAxis}
+                  onToggleVerticalTimeAxis={this.handleToggleVerticalTimeAxis}
+                />
+                <GraphOptionsDecimalPlaces
+                  digits={decimalPlaces.digits}
+                  isEnforced={decimalPlaces.isEnforced}
+                  onDecimalPlacesChange={this.handleDecimalPlacesChange}
+                />
+                <ThresholdsListTypeToggle
+                  containerClass="form-group col-xs-6"
+                  type={type}
+                  thresholdsListType={thresholdsListType} // text 和 background  原本Table控制背景色变量
+                  onUpdateThresholdsListType={onUpdateThresholdsListType}
+                />
+              </div>
+              <GraphOptionsCustomizeFields
+                fields={fieldOptionsCustom}
+                onFieldUpdate={this.handleFieldUpdate}
+                moveField={this.moveField}
+              />
+            </div>
+          </FancyScrollbar>
+        )
+      default:
+        return (
+          <FancyScrollbar className="display-options" autoHide={false}>
+            <div className="display-options--wrapper">
+              <h5 className="display-options--header">Table Controls</h5>
+              <div className="form-group-wrapper">
+                <GraphOptionsSortBy
+                  selected={tableOptions.sortBy || DEFAULT_INFLUXQL_TIME_FIELD}
+                  sortByOptions={tableSortByOptions}
+                  onChooseSortBy={this.handleChooseSortBy}
+                />
+                <GraphOptionsDecimalPlaces
+                  digits={decimalPlaces.digits}
+                  isEnforced={decimalPlaces.isEnforced}
+                  onDecimalPlacesChange={this.handleDecimalPlacesChange}
+                />
+                <GraphOptionsTimeAxis
+                  verticalTimeAxis={verticalTimeAxis}
+                  onToggleVerticalTimeAxis={this.handleToggleVerticalTimeAxis}
+                />
+                <GraphOptionsTimeFormat
+                  timeFormat={timeFormat}
+                  onTimeFormatChange={this.handleTimeFormatChange}
+                />
+                <GraphOptionsFixFirstColumn
+                  fixed={fixFirstColumn}
+                  onToggleFixFirstColumn={this.handleToggleFixFirstColumn}
+                />
+              </div>
+              <GraphOptionsCustomizeFields
+                fields={fieldOptions}
+                onFieldUpdate={this.handleFieldUpdate}
+                moveField={this.moveField}
+              />
+              <ThresholdsList
+                showListHeading={true}
+                onResetFocus={onResetFocus}
+                thresholdsListType={thresholdsListType}
+                thresholdsListColors={thresholdsListColors}
+                onUpdateThresholdsListColors={onUpdateThresholdsListColors}
+              />
+              <div className="form-group-wrapper graph-options-group">
+                <ThresholdsListTypeToggle
+                  containerClass="form-group col-xs-6"
+                  type={type}
+                  thresholdsListType={thresholdsListType}
+                  onUpdateThresholdsListType={onUpdateThresholdsListType}
+                />
+              </div>
+            </div>
+          </FancyScrollbar>
+        )
+    }
   }
 
   private moveField(dragIndex, hoverIndex) {

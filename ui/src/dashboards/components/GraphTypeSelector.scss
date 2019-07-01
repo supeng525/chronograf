@@ -125,6 +125,29 @@ $graph-type--graphic: 150px;
     opacity: 1;
   }
 }
+// sup test
+.graph-type-selector--graphic-scatter {
+  stroke-width: 1px;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+
+  &.graphic-scatter-a {
+    stroke: $g11-sidewalk;
+    fill: $g11-sidewalk;
+  }
+  &.graphic-scatter-b {
+    stroke: $g9-mountain;
+    fill: $g9-mountain;
+  }
+  &.graphic-scatter-c {
+    stroke: $g7-graphite;
+    fill: $g7-graphite;
+  }
+  &.graphic-scatter-d {
+    stroke: $g13-mist;
+    fill: $g13-mist;
+  }
+}
 .graph-type-selector--option.active .graph-type-selector--graphic {
   .graph-type-selector--graphic-line.graphic-line-a {
     stroke: $c-pool;
@@ -155,5 +178,21 @@ $graph-type--graphic: 150px;
   .graph-type-selector--graphic-fill.graphic-fill-d {
     fill: $g17-whisper;
     opacity: 1;
+  }
+  .graph-type-selector--graphic-scatter.graphic-scatter-a {
+    stroke: $c-pool;
+    fill: $c-pool;
+  }
+  .graph-type-selector--graphic-scatter.graphic-scatter-b {
+    stroke: $c-dreamsicle;
+    fill: $c-dreamsicle;
+  }
+  .graph-type-selector--graphic-scatter.graphic-scatter-c {
+    stroke: $c-rainforest;
+    fill: $c-rainforest;
+  }
+  .graph-type-selector--graphic-scatter.graphic-scatter-d {
+    stroke: $g17-whisper;
+    fill: $g17-whisper;
   }
 }

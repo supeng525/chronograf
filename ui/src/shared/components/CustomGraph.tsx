@@ -37,10 +37,12 @@ import {
   FieldOption,
   DecimalPlaces,
   Sort,
+  ThresholdType,
 } from 'src/types/dashboards'
 import {QueryUpdateState} from 'src/types'
 
 import {FormattedTableData} from 'src/shared/components/TableGraphFormat'
+import ScatterEcharts from 'src/shared/components/ScatterEcharts'
 
 const COLUMN_MIN_WIDTH = 100
 const ROW_HEIGHT = 30
@@ -61,6 +63,8 @@ interface CellRendererProps {
 
 interface Props {
   data: FormattedTableData
+  // sup test
+  dataCustom: any[]
   onSort: (fieldName: string) => void
   sort: Sort
   dataType: DataType
@@ -86,7 +90,7 @@ interface State {
 }
 
 @ErrorHandling
-class TableGraph extends PureComponent<Props, State> {
+class CustomGraph extends PureComponent<Props, State> {
   private gridContainer: HTMLDivElement
   private multiGrid?: MultiGrid
 
@@ -107,52 +111,34 @@ class TableGraph extends PureComponent<Props, State> {
   public render() {
     const {
       data: {transformedData},
+      decimalPlaces,
+      dataCustom,
+      colors,
+      tableOptions,
+      fieldOptions,
+      dataType,
+      editorLocation,
+      onUpdateFieldOptions
     } = this.props
+    // console.log('sup2', colors)//thresholdsListType)
     const columnCount = _.get(transformedData, ['0', 'length'], 0)
     const rowCount = columnCount === 0 ? 0 : transformedData.length
     const fixedColumnCount = this.fixFirstColumn && columnCount > 1 ? 1 : 0
-    const {scrollToColumn, scrollToRow, externalScroll} = this.scrollToColRow
+    // const {scrollToColumn, scrollToRow, externalScroll} = this.scrollToColRow
     return (
       <div
         className={this.tableContainerClassName}
         ref={gridContainer => (this.gridContainer = gridContainer)}
         onMouseLeave={this.handleMouseLeave}
       >
-        {rowCount > 0 && (
-          <AutoSizer>
-            {({width, height}) => (
-              <ColumnSizer
-                columnCount={this.computedColumnCount}
-                columnMinWidth={COLUMN_MIN_WIDTH}
-                width={width}
-              >
-                {({
-                  adjustedWidth,
-                  columnWidth,
-                  registerChild,
-                }: SizedColumnProps) => (
-                  <MultiGrid
-                    onMount={this.handleMultiGridMount}
-                    ref={registerChild}
-                    columnCount={columnCount}
-                    columnWidth={this.calculateColumnWidth(columnWidth)}
-                    scrollToRow={scrollToRow}
-                    scrollToColumn={scrollToColumn}
-                    rowCount={rowCount}
-                    rowHeight={ROW_HEIGHT}
-                    height={height}
-                    width={adjustedWidth}
-                    fixedColumnCount={fixedColumnCount}
-                    fixedRowCount={1}
-                    cellRenderer={this.cellRenderer}
-                    classNameBottomRightGrid="table-graph--scroll-window"
-                    externalScroll={externalScroll}
-                  />
-                )}
-              </ColumnSizer>
-            )}
-          </AutoSizer>
-        )}
+        <ScatterEcharts
+          transformedData={transformedData}
+          decimalPlaces={decimalPlaces}
+          dataCustom={dataCustom}
+          colors={colors}
+          // tableOptions={tableOptions}
+          // onUpdateFieldOptions={onUpdateFieldOptions}
+        />
       </div>
     )
   }
@@ -514,6 +500,7 @@ class TableGraph extends PureComponent<Props, State> {
     const isFixedCorner = isFirstRow && isFirstCol
 
     const cellDataIsNumerical = isNumerical(cellData)
+    // console.log('transformedData',transformedData)
 
     let cellStyle: React.CSSProperties = style //tslint:disable-line
     if (
@@ -590,4 +577,4 @@ const mstp = ({dashboardUI}) => ({
   hoverTime: dashboardUI.hoverTime,
 })
 
-export default connect(mstp)(TableGraph)
+export default connect(mstp)(CustomGraph)

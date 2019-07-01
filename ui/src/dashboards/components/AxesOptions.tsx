@@ -84,7 +84,7 @@ class AxesOptions extends PureComponent<Props, State> {
   public render() {
     const {
       axes: {
-        x: {tradingHours1,tradingHours2, tradingHours3},
+        x: {tradingHours1, tradingHours2, tradingHours3},
         y: {bounds, label, scale},
       },
       type,
@@ -103,17 +103,17 @@ class AxesOptions extends PureComponent<Props, State> {
     // }//else
     // {
     //   temp = tradingHours1
-    // } 
+    // }
     // sup test
     // const [tradingHoursStart1, tradingHoursEnd1] = tradingHours1
     // const [tradingHoursStart2, tradingHoursEnd2] = tradingHours2
     const [tradingHoursStart1Temp, tradingHoursEnd1Temp] = tradingHours1
     const [tradingHoursStart2Temp, tradingHoursEnd2Temp] = tradingHours2
     const [tradingHoursStart3, tradingHoursEnd3] = tradingHours3
-    var tradingHoursStart1 = tradingHoursStart1Temp;
-    var tradingHoursStart2 = tradingHoursStart2Temp;
-    var tradingHoursEnd1 = tradingHoursEnd1Temp;
-    var tradingHoursEnd2 = tradingHoursEnd2Temp;
+    let tradingHoursStart1 = tradingHoursStart1Temp
+    let tradingHoursStart2 = tradingHoursStart2Temp
+    let tradingHoursEnd1 = tradingHoursEnd1Temp
+    let tradingHoursEnd2 = tradingHoursEnd2Temp
     const timeData = {
       tradingHoursStart1: '09:30',
       tradingHoursEnd1: '11:30',
@@ -208,10 +208,10 @@ class AxesOptions extends PureComponent<Props, State> {
             <div className="form-group col-sm-6">
               <label htmlFor="TradingHoursEnd1">TradingHours AM End</label>
               <OptIn
-              customPlaceholder={'tradingHoursEnd1'}
-              customValue={tradingHoursEnd1}
-              onSetValue={this.handleSetXAxisTradingHoursEnd1}
-              type="time"
+                customPlaceholder={'tradingHoursEnd1'}
+                customValue={tradingHoursEnd1}
+                onSetValue={this.handleSetXAxisTradingHoursEnd1}
+                type="time"
               />
             </div>
             <div className="form-group col-sm-6">
@@ -226,10 +226,10 @@ class AxesOptions extends PureComponent<Props, State> {
             <div className="form-group col-sm-6">
               <label htmlFor="TradingHoursEnd2">TradingHours PM End</label>
               <OptIn
-              customPlaceholder={'tradingHoursEnd2'}
-              customValue={tradingHoursEnd2}
-              onSetValue={this.handleSetXAxisTradingHoursEnd2}
-              type="time"
+                customPlaceholder={'tradingHoursEnd2'}
+                customValue={tradingHoursEnd2}
+                onSetValue={this.handleSetXAxisTradingHoursEnd2}
+                type="time"
               />
             </div>
             <div className="form-group col-sm-6">
@@ -244,10 +244,10 @@ class AxesOptions extends PureComponent<Props, State> {
             <div className="form-group col-sm-6">
               <label htmlFor="TradingHoursEnd3">TradingHours PM/AM End</label>
               <OptIn
-              customPlaceholder={'tradingHoursEnd3'}
-              customValue={tradingHoursEnd3}
-              onSetValue={this.handleSetXAxisTradingHoursEnd3}
-              type="time"
+                customPlaceholder={'tradingHoursEnd3'}
+                customValue={tradingHoursEnd3}
+                onSetValue={this.handleSetXAxisTradingHoursEnd3}
+                type="time"
               />
             </div>
           </form>

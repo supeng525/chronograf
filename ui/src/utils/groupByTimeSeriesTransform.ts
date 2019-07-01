@@ -61,7 +61,18 @@ const flattenGroupBySeries = (
   }
 
   const tagsKeys = _.keys(tags)
-  const seriesArray = getDeep<TimeSeriesSeries[]>(results, '[0].series', [])
+  // sup test
+  let serierString = ''
+  let firstColumnsString = ''
+  if (responseIndex === 0) {
+    serierString = '[0].series'
+    firstColumnsString = '[0].series[0]columns'
+  } else {
+    serierString = '[' + String(responseIndex) + '].series'
+    firstColumnsString = '[' + String(responseIndex) + '].series[0]columns'
+  }
+  // const seriesArray = getDeep<TimeSeriesSeries[]>(results, '[0].series', [])
+  const seriesArray = getDeep<TimeSeriesSeries[]>(results, serierString, [])
 
   const accumulatedValues = fastReduce<TimeSeriesSeries, TimeSeriesValue[][]>(
     seriesArray,
@@ -77,15 +88,16 @@ const flattenGroupBySeries = (
     },
     []
   )
-  const firstColumns = getDeep<string[]>(results, '[0].series[0]columns', [])
+  // const firstColumns = getDeep<string[]>(results, '[0].series[0]columns', [])
+  const firstColumns = getDeep<string[]>(results, firstColumnsString, [])
 
   const flattenedSeries: Result[] = [
     {
       series: [
         {
           columns: firstColumns,
-          tags: _.get(results, [0, 'series', 0, 'tags'], {}),
-          name: _.get(results, [0, 'series', 0, 'name'], ''),
+          tags: _.get(results, [responseIndex, 'series', 0, 'tags'], {}),
+          name: _.get(results, [responseIndex, 'series', 0, 'name'], ''),
           values: [...accumulatedValues],
         },
       ],
@@ -100,10 +112,11 @@ const flattenGroupBySeries = (
 const constructResults = (
   raw: TimeSeriesServerResponse[],
   isTable: boolean
-): Result[] => {
-  const MappedResponse = fastMap<TimeSeriesServerResponse, Result[]>(
+): Result[][] => {
+  const MappedResponse = fastMap<TimeSeriesServerResponse, Result[][]>(
     raw,
     (response, index) => {
+      // 获取查询到的具体数据
       const results = getDeep<TimeSeriesResult[]>(
         response,
         'response.results',
@@ -113,20 +126,35 @@ const constructResults = (
       const successfulResults = results.filter(
         r => 'series' in r && !('error' in r)
       ) as TimeSeriesSuccessfulResult[]
-
       const tagsFromResults: {[x: string]: string} = _.get(
         results,
         ['0', 'series', '0', 'tags'],
         {}
       )
+      // sup test 解析查询出来的第二组数据
+      const tagsFromResults1: {[x: string]: string} = _.get(
+        results,
+        ['1', 'series', '0', 'tags'],
+        {}
+      )
+
       const hasGroupBy = !_.isEmpty(tagsFromResults)
+      // const hasGroupBy1 = !_.isEmpty(tagsFromResults1)
       if (isTable && hasGroupBy) {
         const groupBySeries = flattenGroupBySeries(
           successfulResults,
           index,
           tagsFromResults
         )
-        return groupBySeries
+        if (successfulResults.length === 1) {
+          return [groupBySeries, null]
+        }
+        const groupBySeriesCustom = flattenGroupBySeries(
+          successfulResults,
+          index + 1,
+          tagsFromResults1
+        )
+        return [groupBySeries, groupBySeriesCustom]
       }
 
       const noGroupBySeries = fastMap<TimeSeriesSuccessfulResult, Result>(
@@ -136,7 +164,7 @@ const constructResults = (
           responseIndex: index,
         })
       )
-      return noGroupBySeries
+      return [noGroupBySeries, null]
     }
   )
   return _.flatten(MappedResponse)
@@ -410,35 +438,79 @@ export const groupByTimeSeriesTransform = (
   sortedTimeSeries: TimeSeries[]
   queryType: InfluxQLQueryType
   metaQuerySeries?: TimeSeriesValue[][]
+  // sup test
+  sortedLabelsCustom: Label[]
+  sortedTimeSeriesCustom: TimeSeries[]
 } => {
-  const results = constructResults(raw, isTable)
+  const results = constructResults(raw, isTable)[0]
   const serieses = constructSerieses(results)
-  const {
+  // tslint:disable-next-line: prefer-const
+  let sortedLabelsReturn: Label[][] = []
+  let sortedLabelsCustom = null
+  let sortedTimeSeriesCustom = null
+  // console.log('sup1-3', results,raw)
+  var {
     cells,
     sortedLabels,
     seriesLabels,
     queryType,
     metaQuerySeries,
   } = constructCells(serieses)
-
+  // console.log('sup1-4', seriesLabels,sortedLabels,cells,queryType)
+  sortedLabelsReturn.push(sortedLabels)
+  // console.log('sup1-6', sortedLabelsReturn)
   if (queryType === InfluxQLQueryType.MetaQuery) {
     return {
       sortedLabels,
       sortedTimeSeries: null,
       queryType,
       metaQuerySeries,
+      sortedLabelsCustom,
+      sortedTimeSeriesCustom,
     }
   }
-
   const sortedTimeSeries = constructTimeSeries(
     serieses,
     cells,
     sortedLabels,
     seriesLabels
   )
+  // console.log('sup1-5', sortedTimeSeries)
+  // sup test
+  const resultsCustom = constructResults(raw, isTable)[1]
+  // console.log('sup1-2', sortedTimeSeries,sortedTimeSeriesCustom)
+  if (resultsCustom == null) {
+    return {
+      sortedLabels,
+      sortedTimeSeries,
+      queryType,
+      sortedLabelsCustom,
+      sortedTimeSeriesCustom,
+    }
+  }
+  const seriesesCustom = constructSerieses(resultsCustom)
+  var {
+    cells,
+    sortedLabels,
+    seriesLabels,
+    queryType,
+    metaQuerySeries,
+  } = constructCells(seriesesCustom)
+  sortedLabelsReturn.push(sortedLabels)
+  sortedTimeSeriesCustom = constructTimeSeries(
+    seriesesCustom,
+    cells,
+    sortedLabels,
+    seriesLabels
+  )
+  sortedLabels = sortedLabelsReturn[0]
+  sortedLabelsCustom = sortedLabelsReturn[1]
+  // console.log('sup1-2', sortedLabelsReturn,sortedTimeSeries,sortedLabels,sortedLabelsCustom,sortedTimeSeriesCustom)
   return {
     sortedLabels,
     sortedTimeSeries,
     queryType,
+    sortedLabelsCustom,
+    sortedTimeSeriesCustom,
   }
 }
