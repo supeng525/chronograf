@@ -38,7 +38,7 @@ import {
   DecimalPlaces,
   Sort,
 } from 'src/types/dashboards'
-import {QueryUpdateState} from 'src/types'
+import {QueryUpdateState, TimeZones} from 'src/types'
 
 import {FormattedTableData} from 'src/shared/components/TableGraphFormat'
 
@@ -66,6 +66,7 @@ interface Props {
   dataType: DataType
   tableOptions: TableOptions
   timeFormat: string
+  timeZone: TimeZones
   decimalPlaces: DecimalPlaces
   fieldOptions: FieldOption[]
   hoverTime: string
@@ -76,7 +77,6 @@ interface Props {
 }
 
 interface State {
-  sortedTimeVals: TimeSeriesValue[]
   sortedLabels: Label[]
   hoveredColumnIndex: number
   hoveredRowIndex: number
@@ -95,7 +95,6 @@ class TableGraph extends PureComponent<Props, State> {
 
     this.state = {
       shouldResize: false,
-      sortedTimeVals: [],
       sortedLabels: [],
       hoveredColumnIndex: NULL_ARRAY_INDEX,
       hoveredRowIndex: NULL_ARRAY_INDEX,
@@ -134,21 +133,21 @@ class TableGraph extends PureComponent<Props, State> {
                   registerChild,
                 }: SizedColumnProps) => (
                   <MultiGrid
-                    onMount={this.handleMultiGridMount}
+                    height={height}
+                    fixedRowCount={1}
                     ref={registerChild}
+                    rowCount={rowCount}
+                    width={adjustedWidth}
+                    rowHeight={ROW_HEIGHT}
                     columnCount={columnCount}
-                    columnWidth={this.calculateColumnWidth(columnWidth)}
                     scrollToRow={scrollToRow}
                     scrollToColumn={scrollToColumn}
-                    rowCount={rowCount}
-                    rowHeight={ROW_HEIGHT}
-                    height={height}
-                    width={adjustedWidth}
-                    fixedColumnCount={fixedColumnCount}
-                    fixedRowCount={1}
-                    cellRenderer={this.cellRenderer}
-                    classNameBottomRightGrid="table-graph--scroll-window"
                     externalScroll={externalScroll}
+                    cellRenderer={this.cellRenderer}
+                    onMount={this.handleMultiGridMount}
+                    fixedColumnCount={fixedColumnCount}
+                    classNameBottomRightGrid="table-graph--scroll-window"
+                    columnWidth={this.calculateColumnWidth(columnWidth)}
                   />
                 )}
               </ColumnSizer>
@@ -178,10 +177,7 @@ class TableGraph extends PureComponent<Props, State> {
   }
 
   public async componentDidMount() {
-    const {
-      data: {sortedTimeVals},
-      fieldOptions,
-    } = this.props
+    const {fieldOptions} = this.props
 
     window.addEventListener('resize', this.handleResize)
 
@@ -191,7 +187,6 @@ class TableGraph extends PureComponent<Props, State> {
 
     this.setState(
       {
-        sortedTimeVals,
         hoveredColumnIndex: NULL_ARRAY_INDEX,
         hoveredRowIndex: NULL_ARRAY_INDEX,
         isTimeVisible,
@@ -322,7 +317,10 @@ class TableGraph extends PureComponent<Props, State> {
     scrollToColumn: number | null
     externalScroll: boolean
   } {
-    const {sortedTimeVals, hoveredColumnIndex, isTimeVisible} = this.state
+    const {
+      data: {sortedTimeVals},
+    } = this.props
+    const {hoveredColumnIndex, isTimeVisible} = this.state
     const {hoverTime} = this.props
     const hoveringThisTable = hoveredColumnIndex !== NULL_ARRAY_INDEX
     const notHovering = hoverTime === NULL_HOVER_TIME
@@ -373,7 +371,10 @@ class TableGraph extends PureComponent<Props, State> {
   private handleHover = (e: React.MouseEvent<HTMLElement>) => {
     const {dataset} = e.target as HTMLElement
     const {handleSetHoverTime} = this.props
-    const {sortedTimeVals, isTimeVisible} = this.state
+    const {
+      data: {sortedTimeVals},
+    } = this.props
+    const {isTimeVisible} = this.state
     if (this.isVerticalTimeAxis && +dataset.rowIndex === 0) {
       return
     }
@@ -445,9 +446,15 @@ class TableGraph extends PureComponent<Props, State> {
     isTimeData: boolean,
     isFieldName: boolean
   ): string => {
-    const {timeFormat, decimalPlaces} = this.props
+    const {timeFormat, timeZone, decimalPlaces} = this.props
 
     if (isTimeData) {
+      if (timeZone === TimeZones.UTC) {
+        return moment(cellData)
+          .utc()
+          .format(timeFormat)
+      }
+
       return moment(cellData).format(timeFormat)
     }
 
@@ -588,8 +595,9 @@ class TableGraph extends PureComponent<Props, State> {
   }
 }
 
-const mstp = ({dashboardUI}) => ({
+const mstp = ({dashboardUI, app}) => ({
   hoverTime: dashboardUI.hoverTime,
+  timeZone: app.persisted.timeZone,
 })
 
 export default connect(mstp)(TableGraph)

@@ -1,5 +1,35 @@
-## v1.7.10 [unreleased]
+## v1.7.13
 ### Bug Fixes
+1. [#5217](https://github.com/influxdata/chronograf/pull/5217): Fix scroll to row bug on table graphs
+1. [#5170](https://github.com/influxdata/chronograf/pull/5170): Wrap inline commas in quotes to distinguish from csv delimiters
+1. [#5225](https://github.com/influxdata/chronograf/pull/5225): Fix tickscript editor syntax coloring
+
+### Features
+
+## v1.7.12 [2019-06-20]
+### Bug Fixes
+1. [#5208](https://github.com/influxdata/chronograf/pull/5208): Clarify wording of PagerDuty v1 deprecation message
+1. [#5198](https://github.com/influxdata/chronograf/pull/5198): Requesting info from an unavailable source no longer causes the page to hang
+1. [#5171](https://github.com/influxdata/chronograf/pull/5171): Create chronograf user before CentOS installation
+1. [#5183](https://github.com/influxdata/chronograf/pull/5183): Add support for web workers in IE11
+1. [#5184](https://github.com/influxdata/chronograf/pull/5184): Properly update query time bounds when zooming in on a dashboard
+1. [#5139](https://github.com/influxdata/chronograf/pull/5139): Fix an issue where Flux responses weren't parsed correctly
+
+### Features
+1. [#5187](https://github.com/influxdata/chronograf/pull/5187): Allow negative numbers for configured y-axis minimums
+
+## v1.7.11 [2019-04-23]
+### Bug Fixes
+1. [#5154](https://github.com/influxdata/chronograf/pull/5154): Fix fetching tag keys in flux builder
+### Features
+
+## v1.7.10 [2019-04-16]
+### Bug Fixes
+1. [#5149](https://github.com/influxdata/chronograf/pull/5149): Fix Cell editor visualization not using ceo time range
+1. [#5148](https://github.com/influxdata/chronograf/pull/5148): Fixed an issue where imports were not working in Flux scripts
+
+### Features
+1. [#5150](https://github.com/influxdata/chronograf/pull/5150): Updated the UI to work with the latest Flux version
 
 ## v1.7.9 [2019-03-20]
 ### Bug Fixes
@@ -18,8 +48,6 @@
 1. [#5079](https://github.com/influxdata/chronograf/pull/5079): Fix multiple organizations not showing configured kapacitors
 1. [#5078](https://github.com/influxdata/chronograf/pull/5078): Fix the inability to edit kapacitor info in the onboarding wizard
 1. [#5083](https://github.com/influxdata/chronograf/pull/5083): Fix the column names in the Window function example
-
-## v1.7.7 [2018-01-16]
 
 ### Bug Fixes
 1. [#5045](https://github.com/influxdata/chronograf/pull/5045): Use JWT in enterprise for authentication in flux
