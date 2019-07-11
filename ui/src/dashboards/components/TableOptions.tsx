@@ -90,7 +90,7 @@ export class TableOptions extends Component<Props, {}> {
     switch (type) {
       case CellType.Custom:
         // 去掉时间
-        let fieldOptionsCustom = fieldOptions.slice(1,fieldOptions.length) 
+        // let fieldOptionsCustom = fieldOptions.slice(1,fieldOptions.length) 
         return (
           <FancyScrollbar className="display-options" autoHide={false}>
             <div className="display-options--wrapper">
