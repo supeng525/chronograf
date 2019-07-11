@@ -96,14 +96,23 @@ export class TableOptions extends Component<Props, {}> {
             <div className="display-options--wrapper">
               <h5 className="display-options--header">{menuOption} Controls</h5>
               <div className="form-group-wrapper">
-                <GraphOptionsTimeAxis
-                  verticalTimeAxis={verticalTimeAxis}
-                  onToggleVerticalTimeAxis={this.handleToggleVerticalTimeAxis}
+              <GraphOptionsSortBy
+                  selected={tableOptions.sortBy || DEFAULT_INFLUXQL_TIME_FIELD}
+                  sortByOptions={tableSortByOptions}
+                  onChooseSortBy={this.handleChooseSortBy}
                 />
                 <GraphOptionsDecimalPlaces
                   digits={decimalPlaces.digits}
                   isEnforced={decimalPlaces.isEnforced}
                   onDecimalPlacesChange={this.handleDecimalPlacesChange}
+                />
+                <GraphOptionsTimeAxis
+                  verticalTimeAxis={verticalTimeAxis}
+                  onToggleVerticalTimeAxis={this.handleToggleVerticalTimeAxis}
+                />
+                <GraphOptionsTimeFormat
+                  timeFormat={timeFormat}
+                  onTimeFormatChange={this.handleTimeFormatChange}
                 />
                 <ThresholdsListTypeToggle
                   containerClass="form-group col-xs-6"
@@ -113,7 +122,7 @@ export class TableOptions extends Component<Props, {}> {
                 />
               </div>
               <GraphOptionsCustomizeFields
-                fields={fieldOptionsCustom}
+                fields={fieldOptions}
                 onFieldUpdate={this.handleFieldUpdate}
                 moveField={this.moveField}
               />

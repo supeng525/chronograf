@@ -114,6 +114,7 @@ class CustomGraph extends PureComponent<Props, State> {
       decimalPlaces,
       dataCustom,
       colors,
+      timeFormat,
       tableOptions,
       fieldOptions,
       dataType,
@@ -136,6 +137,7 @@ class CustomGraph extends PureComponent<Props, State> {
           decimalPlaces={decimalPlaces}
           dataCustom={dataCustom}
           colors={colors}
+          timeFormat={timeFormat}
           // tableOptions={tableOptions}
           // onUpdateFieldOptions={onUpdateFieldOptions}
         />
