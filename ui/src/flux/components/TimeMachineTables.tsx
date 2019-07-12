@@ -194,7 +194,7 @@ class TimeMachineTables extends PureComponent<Props, State> {
     const table = filteredTables.find(
       d => d.name === this.state.selectedResultName
     )
-
+    // console.log('sup',this.props.data,table)
     return table
   }
 }

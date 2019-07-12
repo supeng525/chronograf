@@ -132,7 +132,6 @@ export function getLocalStorage(
 
       return {fluxProportions, timeMachineProportions, thresholdsListType}
     }
-
     return data
   } catch {
     return {}
@@ -144,6 +143,5 @@ export function setLocalStorage(
   data: TimeMachineState
 ): void {
   const localStorageData = {version: GIT_SHA, data}
-
   window.localStorage.setItem(key, JSON.stringify(localStorageData))
 }

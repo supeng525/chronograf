@@ -107,12 +107,10 @@ class TableGraph extends PureComponent<Props, State> {
     const {
       data: {transformedData},
     } = this.props
-
     const columnCount = _.get(transformedData, ['0', 'length'], 0)
     const rowCount = columnCount === 0 ? 0 : transformedData.length
     const fixedColumnCount = this.fixFirstColumn && columnCount > 1 ? 1 : 0
     const {scrollToColumn, scrollToRow, externalScroll} = this.scrollToColRow
-
     return (
       <div
         className={this.tableContainerClassName}

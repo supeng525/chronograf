@@ -14,7 +14,7 @@ const GraphOptionsTimeAxis: SFC<GraphOptionsTimeAxisProps> = ({
   onToggleVerticalTimeAxis,
 }) => (
   <div className="form-group col-xs-12 col-sm-6">
-    <label>Time Axis</label>
+    <label>X-Axis</label>
     <Radio shape={ButtonShape.StretchToFit}>
       <Radio.Button
         id="graph-time-axis--vertical"

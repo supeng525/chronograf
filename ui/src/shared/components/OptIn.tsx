@@ -44,7 +44,7 @@ export default class OptIn extends Component<Props, State> {
   constructor(props) {
     super(props)
 
-    const {customValue, fixedValue} = props
+    const {customValue, fixedValue, type} = props
 
     this.state = {
       useCustomValue: customValue !== '',
@@ -59,7 +59,10 @@ export default class OptIn extends Component<Props, State> {
   public render() {
     const {fixedPlaceholder, customPlaceholder, type, min, max} = this.props
     const {useCustomValue, customValue} = this.state
-
+    // if(type === 'time' && customValue === '')
+    // {
+    //   this.useFixedValue()
+    // }
     return (
       <div
         className={classnames('opt-in', {
@@ -101,9 +104,35 @@ export default class OptIn extends Component<Props, State> {
   }
 
   private useFixedValue = (): void => {
-    this.setState({useCustomValue: false, customValue: ''}, () =>
-      this.setValue()
-    )
+    // sup test
+    const timeData = {
+      tradingHoursStart1: '09:30',
+      tradingHoursEnd1: '11:30',
+      tradingHoursStart2: '13:00',
+      tradingHoursEnd2: '15:00',
+      tradingHoursStart3: '21:00',
+      tradingHoursEnd3: '23:00',
+    }
+    const {customPlaceholder, type} = this.props
+    const {useCustomValue} = this.state
+    if (type === 'time') {
+      if (!useCustomValue) {
+        // sup test
+        const customValueTemp = timeData[customPlaceholder]
+        this.setState(
+          {useCustomValue: true, customValue: customValueTemp},
+          () => this.setValue()
+        )
+      } else {
+        this.setState({useCustomValue: false, customValue: '0'}, () =>
+          this.setValue()
+        )
+      }
+    } else {
+      this.setState({useCustomValue: false, customValue: ''}, () =>
+        this.setValue()
+      )
+    }
   }
 
   private useCustomValue = (): void => {
@@ -112,6 +141,7 @@ export default class OptIn extends Component<Props, State> {
 
   private handleClickToggle = (): void => {
     const useCustomValueNext = !this.state.useCustomValue
+    // console.log('sup1',useCustomValueNext)
     if (useCustomValueNext) {
       this.useCustomValue()
       this.customValueInput.focus()
@@ -131,13 +161,16 @@ export default class OptIn extends Component<Props, State> {
   ): void => {
     const {min, max, type} = this.props
     const {value} = e.target
-
     if (value === '') {
       this.setCustomValue('')
     } else if (type === 'text') {
       this.setCustomValue(value)
     } else if (type === 'number') {
       this.setCustomValue(toValueInRange(value, min, max))
+    }
+    // sup test
+    else if (type === 'time') {
+      this.setCustomValue(value)
     }
   }
 
@@ -179,13 +212,51 @@ export default class OptIn extends Component<Props, State> {
   }
 
   private setValue = (): void => {
-    const {onSetValue} = this.props
+    const {onSetValue, type, customPlaceholder} = this.props
     const {useCustomValue, fixedValue, customValue} = this.state
-
-    if (useCustomValue) {
-      onSetValue(customValue)
+    const timeData = {
+      tradingHoursStart1: '09:30',
+      tradingHoursEnd1: '11:30',
+      tradingHoursStart2: '13:00',
+      tradingHoursEnd2: '15:00',
+      tradingHoursStart3: '21:00',
+      tradingHoursEnd3: '23:00',
+    }
+    // sup test
+    // console.log('sup1',type,useCustomValue,customValue)
+    if (type === 'time') {
+      if (useCustomValue) {
+        var customValueTemp = customValue
+        if (customValue === '0') {
+          customValueTemp = timeData[customPlaceholder]
+        }
+        // console.log('sup',useCustomValue,customPlaceholder,customValue)
+        switch (customPlaceholder) {
+          case 'tradingHoursStart1':
+          case 'tradingHoursEnd1':
+            if (customValue >= '12:00') {
+              customValueTemp = timeData[customPlaceholder]
+            }
+            break
+          case 'tradingHoursStart2':
+          case 'tradingHoursEnd2':
+          case 'tradingHoursStart3':
+            if (customValue < '12:00') {
+              customValueTemp = timeData[customPlaceholder]
+            }
+            break
+        }
+        this.setState({useCustomValue: true, customValue: customValueTemp})
+        onSetValue(customValueTemp)
+      } else {
+        onSetValue(customValue)
+      }
     } else {
-      onSetValue(fixedValue)
+      if (useCustomValue) {
+        onSetValue(customValue)
+      } else {
+        onSetValue(fixedValue)
+      }
     }
   }
 

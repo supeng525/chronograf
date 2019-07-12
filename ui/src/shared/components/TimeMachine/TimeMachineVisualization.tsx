@@ -67,7 +67,6 @@ const TimeMachineVisualization: SFC<Props> = props => {
     thresholdsListColors: props.thresholdsListColors,
     lineColors: props.lineColors,
   })
-
   return (
     <div className="deceo--top">
       <div className="deceo--visualization">
@@ -108,7 +107,6 @@ const ConnectedTimeMachineVisualization = (props: PassedProps) => (
   <Subscribe to={[TimeMachineContainer]}>
     {(container: TimeMachineContainer) => {
       const {state} = container
-
       return (
         <TimeMachineVisualization
           {...props}

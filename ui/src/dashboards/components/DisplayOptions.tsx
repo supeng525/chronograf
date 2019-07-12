@@ -30,6 +30,7 @@ import {
   NoteVisibility,
   ThresholdType,
   TableOptions as TableOptionsInterface,
+  // TableOptions as TableOptionsInterface,
 } from 'src/types/dashboards'
 import {ColorNumber, ColorString} from 'src/types/colors'
 
@@ -218,6 +219,28 @@ class DisplayOptions extends Component<Props, State> {
       case CellType.Table:
         return (
           <TableOptions
+            type={type}
+            onResetFocus={onResetFocus}
+            queryConfigs={queryConfigs}
+            timeFormat={timeFormat}
+            tableOptions={tableOptions}
+            fieldOptions={fieldOptions}
+            decimalPlaces={decimalPlaces}
+            thresholdsListType={thresholdsListType}
+            thresholdsListColors={thresholdsListColors}
+            onUpdateDecimalPlaces={onUpdateDecimalPlaces}
+            onUpdateFieldOptions={onUpdateFieldOptions}
+            onUpdateTableOptions={onUpdateTableOptions}
+            onUpdateTimeFormat={onUpdateTimeFormat}
+            onUpdateThresholdsListColors={onUpdateThresholdsListColors}
+            onUpdateThresholdsListType={onUpdateThresholdsListType}
+          />
+        )
+      // sup test
+      case CellType.Custom:
+        return (
+          <TableOptions
+            type={type}
             onResetFocus={onResetFocus}
             queryConfigs={queryConfigs}
             timeFormat={timeFormat}
@@ -269,6 +292,7 @@ class DisplayOptions extends Component<Props, State> {
 const ConnectedDisplayOptions = (props: PassedProps) => {
   // TODO: Have individual display option components subscribe directly to
   // relevant props, rather than passing them through here
+  // tslint:disable-next-line:no-console
   return (
     <Subscribe to={[TimeMachineContainer]}>
       {(timeMachineContainer: TimeMachineContainer) => (

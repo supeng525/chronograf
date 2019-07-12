@@ -4,13 +4,15 @@ import OptIn from 'src/shared/components/OptIn'
 import {MIN_DECIMAL_PLACES, MAX_DECIMAL_PLACES} from 'src/dashboards/constants'
 
 import {DecimalPlaces} from 'src/types/dashboards'
+import {DEFAULT_DECIMAL_PLACES} from 'src/dashboards/constants'
 
 interface Props extends DecimalPlaces {
   onDecimalPlacesChange: (decimalPlaces: DecimalPlaces) => void
 }
 
 const fixedValueString = 'fixed'
-const defaultPlaceholder = 'unlimited'
+// sup test
+const defaultPlaceholder = DEFAULT_DECIMAL_PLACES.digits.toString()
 
 @ErrorHandling
 class GraphOptionsDecimalPlaces extends PureComponent<Props> {
@@ -34,10 +36,11 @@ class GraphOptionsDecimalPlaces extends PureComponent<Props> {
       }
       isEnforced = true
     }
+    // console.log('sup2',digits, isEnforced)
     this.props.onDecimalPlacesChange({digits, isEnforced})
   }
-
   public render() {
+    // console.log('sup1',this.props)
     return (
       <div className="form-group col-xs-6">
         <label> Decimal Places </label>
@@ -61,14 +64,14 @@ class GraphOptionsDecimalPlaces extends PureComponent<Props> {
     if (!isEnforced) {
       return defaultPlaceholder
     }
-
     return `${digits}`
   }
 
   private get value(): string {
     const {isEnforced, digits} = this.props
     if (!isEnforced) {
-      return ''
+      //return ''  sup test
+      return defaultPlaceholder
     }
 
     return `${digits}`

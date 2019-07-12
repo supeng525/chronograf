@@ -1,16 +1,24 @@
 import {DecimalPlaces} from 'src/types/dashboards'
 import {isNumerical} from 'src/dashboards/utils/tableGraph'
 import {isFinite} from 'lodash'
+// sup test
+import {DEFAULT_DECIMAL_PLACES} from 'src/dashboards/constants'
 
 export const isTruncatedNumber = <T>(
   value: T | number,
   decimalPlaces: DecimalPlaces
-): value is number => isFinite(value) && decimalPlaces.isEnforced
+): value is number => isFinite(value) // sup test && decimalPlaces.isEnforced
 
 export const toFixed = (
   value: number,
   decimalPlaces: DecimalPlaces
 ): string => {
+
+  // var decimalPlaces1 = decimalPlaces
+ // sup test
+  if (!decimalPlaces.isEnforced) {
+    decimalPlaces = DEFAULT_DECIMAL_PLACES
+  }
   const {digits} = decimalPlaces
 
   if (!isFinite(digits)) {
@@ -20,7 +28,6 @@ export const toFixed = (
   } else if (digits > 20) {
     return value.toFixed(20)
   }
-
   return value.toFixed(digits)
 }
 

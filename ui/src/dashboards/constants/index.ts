@@ -19,7 +19,8 @@ export const TIME_FORMAT_TOOLTIP_LINK: string =
 
 export const DEFAULT_DECIMAL_PLACES: DecimalPlaces = {
   isEnforced: true,
-  digits: 2,
+  // sup test
+  digits: 4,
 }
 
 export interface TimeField {

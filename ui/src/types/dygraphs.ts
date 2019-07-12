@@ -11,6 +11,10 @@ export interface DygraphAxis {
   suffix: string
   base: string
   scale: string
+  // sup test
+  tradingHours1: [string, string]
+  tradingHours2: [string, string]
+  tradingHours3: [string, string]
 }
 
 export interface DygraphSeries {
@@ -281,6 +285,10 @@ export interface PerAxisOptions {
    * that it uses base 2, not 10.
    */
   labelsKMG2?: boolean
+  // sup test trading hours 
+  tradingHours1?: string[]
+  tradingHours2?: string[]
+  tradingHours3: [string, string]
 }
 
 export interface SeriesLegendData {
@@ -550,6 +558,10 @@ export declare class DygraphClass {
    */
   public rollPeriod(): number
 
+  // sup test 交易时段
+  public xTradingHours1(): [string, string]
+  public xTradingHours2(): [string, string]
+  public xTradingHours3(): [string, string]
   /**
    * Returns the currently-visible x-range. This can be affected by zooming,
    * panning or a call to updateOptions.

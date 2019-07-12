@@ -30,5 +30,6 @@ export const timeSeriesToDygraph = async (
 export const timeSeriesToTableGraph = async (
   raw: TimeSeriesServerResponse[]
 ): Promise<TimeSeriesToTableGraphReturnType> => {
+  // console.log('sup1',raw)
   return await manager.timeSeriesToTableGraph(raw)
 }

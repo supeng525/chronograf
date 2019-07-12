@@ -23,6 +23,16 @@ export default [
     upper: null,
     menuOption: 'Past 15m',
   },
+  // sup test
+  {
+    defaultGroupBy: '1m',
+    seconds: 1800,
+    inputValue: 'Past 30m',
+    lower: 'now() - 30m',
+    lowerFlux: '-30m',
+    upper: null,
+    menuOption: 'Past 30m',
+  },
   {
     defaultGroupBy: '1m',
     seconds: 1800,
@@ -41,11 +51,21 @@ export default [
   },
   {
     defaultGroupBy: '1m',
-    seconds: 5200,
+    seconds: 7200,
     inputValue: 'Past 2h',
     lower: 'now() - 2h',
     upper: null,
     menuOption: 'Past 2h',
+  },
+  // sup test
+  {
+    defaultGroupBy: '1m',
+    seconds: 10800,
+    inputValue: 'Past 3h',
+    lower: 'now() - 3h',
+    lowerFlux: '-3h',
+    upper: null,
+    menuOption: 'Past 3h',
   },
   {
     defaultGroupBy: '1m',

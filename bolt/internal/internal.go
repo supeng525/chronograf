@@ -154,6 +154,9 @@ func MarshalLayout(l chronograf.Layout) ([]byte, error) {
 			axes[a] = &Axis{
 				Bounds: r.Bounds,
 				Label:  r.Label,
+				TradingHours1: r.TradingHours1,
+				TradingHours2: r.TradingHours2,
+				TradingHours3: r.TradingHours3,
 			}
 		}
 
@@ -213,6 +216,9 @@ func UnmarshalLayout(data []byte, l *chronograf.Layout) error {
 			axes[a] = chronograf.Axis{
 				Bounds: r.Bounds,
 				Label:  r.Label,
+				TradingHours1: r.TradingHours1,
+				TradingHours2: r.TradingHours2,
+				TradingHours3: r.TradingHours3,
 			}
 		}
 
@@ -285,6 +291,9 @@ func MarshalDashboard(d chronograf.Dashboard) ([]byte, error) {
 				Suffix: r.Suffix,
 				Base:   r.Base,
 				Scale:  r.Scale,
+				TradingHours1: r.TradingHours1,
+				TradingHours2: r.TradingHours2,
+				TradingHours3: r.TradingHours3,
 			}
 		}
 
@@ -453,6 +462,9 @@ func UnmarshalDashboard(data []byte, d *chronograf.Dashboard) error {
 				Suffix: r.Suffix,
 				Base:   r.Base,
 				Scale:  r.Scale,
+				TradingHours1: r.TradingHours1,
+				TradingHours2: r.TradingHours2,
+				TradingHours3: r.TradingHours3,
 			}
 
 			axes[a] = axis

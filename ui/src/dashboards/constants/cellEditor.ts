@@ -20,7 +20,13 @@ export const AXES_SCALE_OPTIONS = {
   BASE_RAW: 'raw',
 }
 
-type DefaultAxis = Pick<Axis, Exclude<keyof Axis, 'bounds'>>
+type DefaultAxis = Pick<
+  Axis,
+  Exclude<
+    keyof Axis,
+    ['bounds', 'tradingHours1', 'tradingHours2', 'tradingHours3']
+  >
+>
 
 export const DEFAULT_AXIS: DefaultAxis = {
   prefix: '',
@@ -33,6 +39,10 @@ export const DEFAULT_AXIS: DefaultAxis = {
 export const FULL_DEFAULT_AXIS: Axis = {
   ...DEFAULT_AXIS,
   bounds: ['', ''],
+  // sup test
+  tradingHours1: ['09:30', '11:30'],
+  tradingHours2: ['13:00', '15:00'],
+  tradingHours3: ['', ''],
 }
 
 export const DEFAULT_AXES: Axes = {
@@ -59,6 +69,10 @@ export const getCellTypeColors = ({
     }
     case CellType.SingleStat:
     case CellType.Table: {
+      return stringifyColorValues(thresholdsListColors)
+    }
+    // sup test 返回text和background作为x轴是否百分比
+    case CellType.Custom: {
       return stringifyColorValues(thresholdsListColors)
     }
     case CellType.Bar:

@@ -19,7 +19,6 @@ const parseHandlersFromConfig = config => {
   const {
     data: {sections},
   } = config
-
   const allHandlers = _.reduce(
     sections,
     (acc, v, k) => {

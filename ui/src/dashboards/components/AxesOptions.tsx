@@ -18,7 +18,7 @@ import {GRAPH_TYPES} from 'src/dashboards/graphics/graph'
 import {ErrorHandling} from 'src/shared/decorators/errors'
 
 // Types
-import {Axes, CellType} from 'src/types'
+import {Axes} from 'src/types'
 import {DecimalPlaces} from 'src/types/dashboards'
 import {ColorString} from 'src/types/colors'
 
@@ -49,6 +49,10 @@ class AxesOptions extends PureComponent<Props, State> {
     axes: {
       y: {
         bounds: ['', ''],
+        // sup test
+        tradingHours1: ['', ''],
+        tradingHours2: ['', ''],
+        tradingHours3: ['', ''],
         prefix: '',
         suffix: '',
         base: BASE_10,
@@ -57,6 +61,10 @@ class AxesOptions extends PureComponent<Props, State> {
       },
       x: {
         bounds: ['', ''],
+        // sup test
+        tradingHours1: ['09:30', '11:30'],
+        tradingHours2: ['13:00', '15:00'],
+        tradingHours3: ['', ''],
         prefix: '',
         suffix: '',
         base: BASE_10,
@@ -76,7 +84,8 @@ class AxesOptions extends PureComponent<Props, State> {
   public render() {
     const {
       axes: {
-        y: {bounds, label},
+        x: {tradingHours1, tradingHours2, tradingHours3},
+        y: {bounds, label, scale},
       },
       type,
       lineColors,
@@ -86,6 +95,48 @@ class AxesOptions extends PureComponent<Props, State> {
     const {prefix, suffix} = this.state
 
     const [min, max] = bounds
+    // sup test
+    // console.log('s2', tradingHours1, this.props.axes)
+    // let temp
+    // if (typeof tradingHours3 === 'undefined'){
+    //   tradingHours3 = ['','']
+    // }//else
+    // {
+    //   temp = tradingHours1
+    // }
+    // sup test
+    // const [tradingHoursStart1, tradingHoursEnd1] = tradingHours1
+    // const [tradingHoursStart2, tradingHoursEnd2] = tradingHours2
+    const [tradingHoursStart1Temp, tradingHoursEnd1Temp] = tradingHours1
+    const [tradingHoursStart2Temp, tradingHoursEnd2Temp] = tradingHours2
+    const [tradingHoursStart3, tradingHoursEnd3] = tradingHours3
+    let tradingHoursStart1 = tradingHoursStart1Temp
+    let tradingHoursStart2 = tradingHoursStart2Temp
+    let tradingHoursEnd1 = tradingHoursEnd1Temp
+    let tradingHoursEnd2 = tradingHoursEnd2Temp
+    const timeData = {
+      tradingHoursStart1: '09:30',
+      tradingHoursEnd1: '11:30',
+      tradingHoursStart2: '13:00',
+      tradingHoursEnd2: '15:00',
+    }
+    if (tradingHoursStart1 === '') {
+      tradingHoursStart1 = timeData.tradingHoursStart1
+      this.handleSetXAxisTradingHoursStart1(tradingHoursStart1)
+    }
+    if (tradingHoursStart2 === '') {
+      tradingHoursStart2 = timeData.tradingHoursStart2
+      this.handleSetXAxisTradingHoursStart2(tradingHoursStart2)
+    }
+    if (tradingHoursEnd1 === '') {
+      tradingHoursEnd1 = timeData.tradingHoursEnd1
+      this.handleSetXAxisTradingHoursEnd1(tradingHoursEnd1)
+    }
+    if (tradingHoursEnd2 === '') {
+      tradingHoursEnd2 = timeData.tradingHoursEnd2
+      this.handleSetXAxisTradingHoursEnd2(tradingHoursEnd2)
+    }
+    // console.log('sup',tradingHours1)
 
     const {menuOption} = GRAPH_TYPES.find(graph => graph.type === type)
 
@@ -145,6 +196,60 @@ class AxesOptions extends PureComponent<Props, State> {
             {this.scaleTabs}
             {this.decimalPlaces}
             {this.staticLegendTabs}
+            <div className="form-group col-sm-6">
+              <label htmlFor="TradingHoursStart1">TradingHours AM Start</label>
+              <OptIn
+                customPlaceholder={'tradingHoursStart1'}
+                customValue={tradingHoursStart1}
+                onSetValue={this.handleSetXAxisTradingHoursStart1}
+                type="time"
+              />
+            </div>
+            <div className="form-group col-sm-6">
+              <label htmlFor="TradingHoursEnd1">TradingHours AM End</label>
+              <OptIn
+                customPlaceholder={'tradingHoursEnd1'}
+                customValue={tradingHoursEnd1}
+                onSetValue={this.handleSetXAxisTradingHoursEnd1}
+                type="time"
+              />
+            </div>
+            <div className="form-group col-sm-6">
+              <label htmlFor="TradingHoursStart2">TradingHours PM Start</label>
+              <OptIn
+                customPlaceholder={'tradingHoursStart2'}
+                customValue={tradingHoursStart2}
+                onSetValue={this.handleSetXAxisTradingHoursStart2}
+                type="time"
+              />
+            </div>
+            <div className="form-group col-sm-6">
+              <label htmlFor="TradingHoursEnd2">TradingHours PM End</label>
+              <OptIn
+                customPlaceholder={'tradingHoursEnd2'}
+                customValue={tradingHoursEnd2}
+                onSetValue={this.handleSetXAxisTradingHoursEnd2}
+                type="time"
+              />
+            </div>
+            <div className="form-group col-sm-6">
+              <label htmlFor="TradingHoursStart3">TradingHours PM Start</label>
+              <OptIn
+                customPlaceholder={'tradingHoursStart3'}
+                customValue={tradingHoursStart3}
+                onSetValue={this.handleSetXAxisTradingHoursStart3}
+                type="time"
+              />
+            </div>
+            <div className="form-group col-sm-6">
+              <label htmlFor="TradingHoursEnd3">TradingHours PM/AM End</label>
+              <OptIn
+                customPlaceholder={'tradingHoursEnd3'}
+                customValue={tradingHoursEnd3}
+                onSetValue={this.handleSetXAxisTradingHoursEnd3}
+                type="time"
+              />
+            </div>
           </form>
         </div>
       </FancyScrollbar>
@@ -259,12 +364,11 @@ class AxesOptions extends PureComponent<Props, State> {
   }
 
   private get decimalPlaces(): JSX.Element {
-    const {onUpdateDecimalPlaces, decimalPlaces, type} = this.props
+    const {onUpdateDecimalPlaces, decimalPlaces} = this.props
 
-    if (type !== CellType.LinePlusSingleStat) {
-      return null
-    }
-
+    // if (type !== CellType.LinePlusSingleStat) {
+    //   return null
+    // }
     return (
       <GraphOptionsDecimalPlaces
         digits={decimalPlaces.digits}
@@ -328,6 +432,107 @@ class AxesOptions extends PureComponent<Props, State> {
     const bounds: [string, string] = [min, max]
     const newAxes = {...axes, y: {...axes.y, bounds}}
 
+    onUpdateAxes(newAxes)
+  }
+  // sup test
+  private handleSetXAxisTradingHoursStart1 = (
+    tradingHoursStart1: string
+  ): void => {
+    const {onUpdateAxes, axes} = this.props
+    const {
+      x: {
+        tradingHours1: [, tradingHoursEnd1],
+      },
+    } = this.props.axes
+    const tradingHours1: [string, string] = [
+      tradingHoursStart1,
+      tradingHoursEnd1,
+    ]
+    // const newAxes = {x: {...axes.x, tradingHours1}, ...axes}
+    const newAxes = {...axes, x: {...axes.x, tradingHours1}}
+    onUpdateAxes(newAxes)
+    // sup test
+    // let temp = parseInt(tradingHoursEnd1.split(":")[0]) - parseInt(tradingHoursStart1.split(":")[0])
+    // let temp1 = parseInt(tradingHoursEnd1.split(":")[1]) - parseInt(tradingHoursStart1.split(":")[1])
+    // console.log('s2',tradingHours1,temp,temp1)
+  }
+  private handleSetXAxisTradingHoursEnd1 = (tradingHoursEnd1: string): void => {
+    const {onUpdateAxes, axes} = this.props
+    const {
+      x: {
+        tradingHours1: [tradingHoursStart1],
+      },
+    } = this.props.axes
+    const tradingHours1: [string, string] = [
+      tradingHoursStart1,
+      tradingHoursEnd1,
+    ]
+    // const newAxes = {x: {...axes.x, tradingHours1}, ...axes}
+    const newAxes = {...axes, x: {...axes.x, tradingHours1}}
+    onUpdateAxes(newAxes)
+  }
+  // sup test
+  private handleSetXAxisTradingHoursStart2 = (
+    tradingHoursStart2: string
+  ): void => {
+    const {onUpdateAxes, axes} = this.props
+    const {
+      x: {
+        tradingHours2: [, tradingHoursEnd2],
+      },
+    } = this.props.axes
+    const tradingHours2: [string, string] = [
+      tradingHoursStart2,
+      tradingHoursEnd2,
+    ]
+    // const newAxes = {x: {...axes.x, tradingHours1}, ...axes}
+    const newAxes = {...axes, x: {...axes.x, tradingHours2}}
+    onUpdateAxes(newAxes)
+  }
+  private handleSetXAxisTradingHoursEnd2 = (tradingHoursEnd2: string): void => {
+    const {onUpdateAxes, axes} = this.props
+    const {
+      x: {
+        tradingHours2: [tradingHoursStart2],
+      },
+    } = this.props.axes
+    const tradingHours2: [string, string] = [
+      tradingHoursStart2,
+      tradingHoursEnd2,
+    ]
+    // const newAxes = {x: {...axes.x, tradingHours1}, ...axes}
+    const newAxes = {...axes, x: {...axes.x, tradingHours2}}
+    onUpdateAxes(newAxes)
+  }
+  // 夜盘
+  private handleSetXAxisTradingHoursStart3 = (
+    tradingHoursStart3: string
+  ): void => {
+    const {onUpdateAxes, axes} = this.props
+    const {
+      x: {
+        tradingHours3: [, tradingHoursEnd3],
+      },
+    } = this.props.axes
+    const tradingHours3: [string, string] = [
+      tradingHoursStart3,
+      tradingHoursEnd3,
+    ]
+    const newAxes = {...axes, x: {...axes.x, tradingHours3}}
+    onUpdateAxes(newAxes)
+  }
+  private handleSetXAxisTradingHoursEnd3 = (tradingHoursEnd3: string): void => {
+    const {onUpdateAxes, axes} = this.props
+    const {
+      x: {
+        tradingHours3: [tradingHoursStart3],
+      },
+    } = this.props.axes
+    const tradingHours3: [string, string] = [
+      tradingHoursStart3,
+      tradingHoursEnd3,
+    ]
+    const newAxes = {...axes, x: {...axes.x, tradingHours3}}
     onUpdateAxes(newAxes)
   }
 

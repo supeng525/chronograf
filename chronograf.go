@@ -600,6 +600,9 @@ type Axis struct {
 	Suffix       string   `json:"suffix"` // Suffix represents a label suffix for formatting axis values
 	Base         string   `json:"base"`   // Base represents the radix for formatting axis values
 	Scale        string   `json:"scale"`  // Scale is the axis formatting scale. Supported: "log", "linear"
+	TradingHours1 []string `json:"tradingHours1"`
+	TradingHours2 []string `json:"tradingHours2"`
+	TradingHours3 []string `json:"tradingHours3"`
 }
 
 // CellColor represents the encoding of data into visualizations

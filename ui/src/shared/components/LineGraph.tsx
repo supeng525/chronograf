@@ -109,6 +109,7 @@ class LineGraph extends PureComponent<LineGraphProps, State> {
 
       timeSeries = result
 
+
       if (!this.isComponentMounted || uuid !== this.latestUUID) {
         return
       }
@@ -119,7 +120,6 @@ class LineGraph extends PureComponent<LineGraphProps, State> {
     } catch (err) {
       this.isValidData = false
     }
-
     this.setState({timeSeries})
   }
 
@@ -157,7 +157,6 @@ class LineGraph extends PureComponent<LineGraphProps, State> {
     }
 
     const {labels, timeSeries, dygraphSeries} = this.state.timeSeries
-
     const options = {
       rightGap: 0,
       yRangePad: 10,
@@ -172,6 +171,42 @@ class LineGraph extends PureComponent<LineGraphProps, State> {
       stepPlot: type === 'line-stepplot',
       stackedGraph: type === 'line-stacked',
     }
+    // console.log('sup',axes.x)
+    if (typeof axes.x.tradingHours1 === 'undefined') {
+      axes.x.tradingHours1 = ['', '']
+    }
+    if (typeof axes.x.tradingHours2 === 'undefined') {
+      axes.x.tradingHours2 = ['', '']
+    }
+    if (typeof axes.x.tradingHours3 === 'undefined') {
+      axes.x.tradingHours3 = ['', '']
+    }
+    const [tradingHoursStart1, tradingHoursEnd1] = axes.x.tradingHours1
+    const [tradingHoursStart2, tradingHoursEnd2] = axes.x.tradingHours2
+    const [tradingHoursStart3, tradingHoursEnd3] = axes.x.tradingHours3
+    // var tradingHoursStart1 = tradingHoursStart1Temp;
+    // var tradingHoursStart2 = tradingHoursStart2Temp;
+    // var tradingHoursEnd1 = tradingHoursEnd1Temp;
+    // var tradingHoursEnd2 = tradingHoursEnd2Temp;
+    const timeData = {
+      tradingHoursStart1: '09:30',
+      tradingHoursEnd1: '11:30',
+      tradingHoursStart2: '13:00',
+      tradingHoursEnd2: '15:00',
+    }
+    if (tradingHoursStart1 === '') {
+      this.props.axes.x.tradingHours1[0] = timeData.tradingHoursStart1
+    }
+    if (tradingHoursStart2 === '') {
+      this.props.axes.x.tradingHours2[0] = timeData.tradingHoursStart2
+    }
+    if (tradingHoursEnd1 === '') {
+      this.props.axes.x.tradingHours1[1] = timeData.tradingHoursEnd1
+    }
+    if (tradingHoursEnd2 === '') {
+      this.props.axes.x.tradingHours2[1] = timeData.tradingHoursEnd2
+    }
+    // console.log('sup11',timeSeries,dygraphSeries,options)
 
     return (
       <div className="dygraph graph--hasYLabel" style={this.style}>
@@ -192,6 +227,7 @@ class LineGraph extends PureComponent<LineGraphProps, State> {
           isGraphFilled={this.isGraphFilled}
           containerStyle={this.containerStyle}
           handleSetHoverTime={handleSetHoverTime}
+          decimalPlaces={decimalPlaces}
         >
           {type === CellType.LinePlusSingleStat && (
             <SingleStat

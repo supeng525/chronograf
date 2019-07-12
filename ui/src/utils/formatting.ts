@@ -60,9 +60,12 @@ export const numberValueFormatter = (
 
   const kmb = opts('labelsKMB')
   const kmg2 = opts('labelsKMG2')
+  // sup % * 100
+  if (suffix === '%') {
+    x = x * 100
+  }
 
   let label
-
   // switch to scientific notation if we underflow or overflow fixed display.
   if (
     x !== 0.0 &&
@@ -73,7 +76,6 @@ export const numberValueFormatter = (
   } else {
     label = `${roundNum(x, digits)}`
   }
-
   if (kmb || kmg2) {
     let k
     let kLabels = []

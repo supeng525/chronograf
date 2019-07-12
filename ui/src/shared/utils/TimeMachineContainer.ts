@@ -127,7 +127,6 @@ export class TimeMachineContainer extends Container<TimeMachineState> {
     this.localStorageKey = getLocalStorageKey()
 
     const localStorageState = getLocalStorage(this.localStorageKey) || {}
-
     let state = {
       ...DEFAULT_STATE(),
       ...localStorageState,
@@ -141,8 +140,8 @@ export class TimeMachineContainer extends Container<TimeMachineState> {
       const queryDrafts = [newEmptyQueryDraft]
 
       state = {...state, queryDrafts}
-    }
-
+      //console.log('sup',state)
+    }  
     return this.setAndPersistState(state)
   }
 
@@ -172,7 +171,6 @@ export class TimeMachineContainer extends Container<TimeMachineState> {
     }
 
     const newDraftScript = `${draftScript}\n  |> filter(fn: (r) => ${body})`
-
     return this.setAndPersistState({draftScript: newDraftScript})
   }
 
@@ -286,7 +284,6 @@ export class TimeMachineContainer extends Container<TimeMachineState> {
   public handleDeleteQuery = (queryID: string) => {
     const {queryDrafts} = this.state
     const updatedQueryDrafts = queryDrafts.filter(query => query.id !== queryID)
-
     return this.setAndPersistState({queryDrafts: updatedQueryDrafts})
   }
 
@@ -385,7 +382,6 @@ export class TimeMachineContainer extends Container<TimeMachineState> {
     if (this.localStorageKey) {
       this.debouncer.call(this.setLocalStorageState, LOCAL_STORAGE_DELAY_MS)
     }
-
     return this.setState(state)
   }
 

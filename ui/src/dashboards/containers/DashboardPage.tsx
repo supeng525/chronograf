@@ -376,7 +376,6 @@ class DashboardPage extends Component<Props, State> {
     newCell: DashboardsModels.Cell | NewDefaultCell
   ): Promise<void> => {
     const {dashboard} = this.props
-
     if (this.isExistingCell(newCell)) {
       await this.props.updateDashboardCell(dashboard, newCell)
     } else {

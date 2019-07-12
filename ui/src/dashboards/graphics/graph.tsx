@@ -14,6 +14,8 @@ interface GraphSVGs {
   [CellType.Gauge]: Graphic
   [CellType.Table]: Graphic
   [CellType.Note]: Graphic
+  // sup test
+  [CellType.Custom]: Graphic
 }
 const GRAPH_SVGS: GraphSVGs = {
   line: (
@@ -566,6 +568,137 @@ const GRAPH_SVGS: GraphSVGs = {
       </svg>
     </div>
   ),
+  // sup test
+  custom: (
+    <div className="graph-type-selector--graphic">
+      <svg
+        width="100%"
+        height="100%"
+        version="1.1"
+        id="Custom"
+        x="0px"
+        y="0px"
+        viewBox="0 0 150 150"
+        preserveAspectRatio="none meet"
+        shapeRendering="geometricPrecision"
+      >
+        <circle
+          className="graph-type-selector--graphic-scatter graphic-scatter-a"
+          cx="2"
+          cy="111.8"
+          r="2"
+        />
+        <circle
+          className="graph-type-selector--graphic-scatter graphic-scatter-a"
+          cx="38.5"
+          cy="90.8"
+          r="2"
+        />
+        <circle
+          className="graph-type-selector--graphic-scatter graphic-scatter-a"
+          cx="75"
+          cy="25"
+          r="2"
+        />
+        <circle
+          className="graph-type-selector--graphic-scatter graphic-scatter-a"
+          cx="111.5"
+          cy="47.2"
+          r="2"
+        />
+        <circle
+          className="graph-type-selector--graphic-scatter graphic-scatter-a"
+          cx="148"
+          cy="40"
+          r="2"
+        />
+        <circle
+          className="graph-type-selector--graphic-scatter graphic-scatter-b"
+          cx="2"
+          cy="90.8"
+          r="2"
+        />
+        <circle
+          className="graph-type-selector--graphic-scatter graphic-scatter-b"
+          cx="38.5"
+          cy="49.3"
+          r="2"
+        />
+        <circle
+          className="graph-type-selector--graphic-scatter graphic-scatter-b"
+          cx="75"
+          cy="61.7"
+          r="2"
+        />
+        <circle
+          className="graph-type-selector--graphic-scatter graphic-scatter-b"
+          cx="111.5"
+          cy="95.5"
+          r="2"
+        />
+        <circle
+          className="graph-type-selector--graphic-scatter graphic-scatter-b"
+          cx="148"
+          cy="88.2"
+          r="2"
+        />
+        <circle
+          className="graph-type-selector--graphic-scatter graphic-scatter-c"
+          cx="2"
+          cy="115"
+          r="2"
+        />
+        <circle
+          className="graph-type-selector--graphic-scatter graphic-scatter-c"
+          cx="38.5"
+          cy="116.5"
+          r="2"
+        />
+        <circle
+          className="graph-type-selector--graphic-scatter graphic-scatter-c"
+          cx="75"
+          cy="85"
+          r="2"
+        />
+        <circle
+          className="graph-type-selector--graphic-scatter graphic-scatter-c"
+          cx="111.5"
+          cy="106.3"
+          r="2"
+        />
+        <circle
+          className="graph-type-selector--graphic-scatter graphic-scatter-c"
+          cx="148"
+          cy="96"
+          r="2"
+        />
+        {/* <polygon
+          className="graph-type-selector--graphic-fill graphic-fill-a"
+          points="148,40 111.5,47.2 75,25 38.5,90.8 2,111.8 2,125 148,125 	"
+        />
+        <polygon
+          className="graph-type-selector--graphic-fill graphic-fill-b"
+          points="148,88.2 111.5,95.5 75,61.7 38.5,49.3 2,90.8 2,125 148,125 	"
+        />
+        <polygon
+          className="graph-type-selector--graphic-fill graphic-fill-c"
+          points="148,96 111.5,106.3 75,85.7 38.5,116.5 2,115 2,125 148,125 	"
+        /> */}
+        {/* <polyline
+          className="graph-type-selector--graphic-line graphic-line-a"
+          points="2,111.8 38.5,90.8 75,25 111.5,47.2 148,40 	"
+        />
+         <polyline
+          className="graph-type-selector--graphic-line graphic-line-b"
+          points="2,90.8 38.5,49.3 75,61.7 111.5,95.5 148,88.2 	"
+        />
+        <polyline
+          className="graph-type-selector--graphic-line graphic-line-c"
+          points="2,115 38.5,116.5 75,85.7 111.5,106.3 148,96 	" */}
+        />
+      </svg>
+    </div>
+  ),
 }
 
 interface GraphType {
@@ -619,5 +752,10 @@ export const GRAPH_TYPES: GraphType[] = [
     type: CellType.Note,
     menuOption: 'Note',
     graphic: GRAPH_SVGS[CellType.Note],
+  },
+  {
+    type: CellType.Custom,
+    menuOption: 'Custom',
+    graphic: GRAPH_SVGS[CellType.Custom],
   },
 ]

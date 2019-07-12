@@ -411,11 +411,9 @@ const getDashboard = (state, dashboardId: number): Dashboard => {
   const dashboard = state.dashboardUI.dashboards.find(
     d => d.id === +dashboardId
   )
-
   if (!dashboard) {
     throw new Error(`Could not find dashboard with id '${dashboardId}'`)
   }
-
   return dashboard
 }
 
@@ -511,7 +509,7 @@ export const updateDashboardCell = (
   cell: Cell | NewDefaultCell
 ) => async (dispatch: Dispatch<Action>): Promise<void> => {
   try {
-    const {data} = await updateDashboardCellAJAX(cell)
+    const {data} = await updateDashboardCellAJAX(cell)// 保存数据
     dispatch(syncDashboardCell(dashboard, data))
   } catch (error) {
     console.error(error)

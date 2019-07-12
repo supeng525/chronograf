@@ -32,7 +32,6 @@ export default function makeAppStorage(localStorage) {
     if (removeIn) {
       delete existingJSON[key]
     }
-
     localStorage.setItem(item, JSON.stringify(existingJSON))
   }
 }

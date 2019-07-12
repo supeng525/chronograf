@@ -7,6 +7,10 @@ export interface Axis {
   suffix: string
   base: string
   scale: string
+  // sup test
+  tradingHours1?: [string, string]
+  tradingHours2?: [string, string]
+  tradingHours3?: [string, string]// 夜盘
   bounds?: [string, string]
 }
 
@@ -105,6 +109,8 @@ export enum CellType {
   News = 'news',
   Guide = 'guide',
   Note = 'note',
+  // sup test
+  Custom = 'custom',
 }
 
 interface DashboardLinks {

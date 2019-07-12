@@ -50,4 +50,7 @@ export interface TimeSeriesToTableGraphReturnType {
   data: TimeSeriesValue[][]
   sortedLabels: Label[]
   influxQLQueryType: InfluxQLQueryType
+  // sup test
+  dataCustom: TimeSeriesValue[][]
+  sortedLabelsCustom: Label[]
 }

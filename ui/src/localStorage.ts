@@ -31,7 +31,6 @@ export const loadLocalStorage = (errorsQueue: any[]): LocalStorage | {} => {
 
     delete state.VERSION
     delete state.GIT_SHA
-
     return state
   } catch (error) {
     console.error(notifyLoadLocalSettingsFailed(error).message)

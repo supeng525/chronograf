@@ -21,6 +21,16 @@ export const timeRanges: TimeRangeOption[] = [
     upper: null,
     menuOption: 'Past 15m',
   },
+  // sup test
+  {
+    defaultGroupBy: '1m',
+    seconds: 1800,
+    inputValue: 'Past 30m',
+    lower: 'now() - 30m',
+    lowerFlux: '-30m',
+    upper: null,
+    menuOption: 'Past 30m',
+  },
   {
     defaultGroupBy: '1m',
     seconds: 3600,
@@ -29,6 +39,25 @@ export const timeRanges: TimeRangeOption[] = [
     lowerFlux: '-1h',
     upper: null,
     menuOption: 'Past 1h',
+  },
+  // sup test
+  {
+    defaultGroupBy: '1m',
+    seconds: 7200,
+    inputValue: 'Past 2h',
+    lower: 'now() - 2h',
+    lowerFlux: '-2h',
+    upper: null,
+    menuOption: 'Past 2h',
+  },
+  {
+    defaultGroupBy: '1m',
+    seconds: 10800,
+    inputValue: 'Past 3h',
+    lower: 'now() - 3h',
+    lowerFlux: '-3h',
+    upper: null,
+    menuOption: 'Past 3h',
   },
   {
     defaultGroupBy: '1m',
@@ -65,6 +94,16 @@ export const timeRanges: TimeRangeOption[] = [
     lowerFlux: '-2d',
     upper: null,
     menuOption: 'Past 2d',
+  },
+  // sup test
+  {
+    defaultGroupBy: '1h',
+    seconds: 432000,
+    inputValue: 'Past 5d',
+    lower: 'now() - 5d',
+    lowerFlux: '-5d',
+    upper: null,
+    menuOption: 'Past 5d',
   },
   {
     defaultGroupBy: '1h',

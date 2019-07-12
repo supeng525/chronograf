@@ -20,7 +20,6 @@ export default function persistState() {
         saveToLocalStorage(store.getState())
       }, throttleMs)
     )
-
     return store
   }
 }
