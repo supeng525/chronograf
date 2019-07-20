@@ -1,3 +1,5 @@
+/node_modules/*
+!node_modules/dygraphs
 artifacts/
 spec/allSpecs.js
 dev/
