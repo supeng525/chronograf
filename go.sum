@@ -18,6 +18,8 @@ github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf/go.mod h1:ybxpYRF
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883 h1:bvNMNQO63//z+xNgfBlViaCIJKLlCJ6/fmUseuG0wVQ=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
 github.com/anmitsu/go-shlex v0.0.0-20161002113705-648efa622239/go.mod h1:2FmKhYUyUczH0OGQWaF5ceTx0UBShxjsH6f8oGKYe2c=
+github.com/apache/arrow v0.0.0-20190114124456-cf047fc67698 h1:/1/Nk2QvLVv1oJvRorDvm+33Y++Hm6KIo5mzmIRTqhg=
+github.com/apache/arrow v0.0.0-20190114124456-cf047fc67698/go.mod h1:STD6VF1igP35AHE8bSEqD4PNDHjBctEkubVx6wxPA48=
 github.com/apache/arrow/go/arrow v0.0.0-20190107214733-134081bea48d h1:YeyuRFfB3L0OeTishYaVDXN8ZjsmW//+xLkZ7N95nVg=
 github.com/apache/arrow/go/arrow v0.0.0-20190107214733-134081bea48d/go.mod h1:GjvccvtI06FGFvRU1In/maF7tKp3h7GBV9Sexo5rNPM=
 github.com/apex/log v1.1.0 h1:J5rld6WVFi6NxA6m8GJ1LJqu3+GiTFIt3mYv27gdQWI=
@@ -125,6 +127,7 @@ github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af h1:pmfjZENx5i
 github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af/go.mod h1:Nht3zPeWKUH0NzdCt2Blrr5ys8VGpn0CEB0cQHVjt7k=
 github.com/kamilsk/retry v0.0.0-20181229152359-495c1d672c93 h1:aP888S37c3tqOCllQAxo5xDE+LJesxR0OH7zntgoPiM=
 github.com/kamilsk/retry v0.0.0-20181229152359-495c1d672c93/go.mod h1:vW4uuVWZOGWqkbtgGTNPGAiuN2nUBz0qYr4tb2ww4x8=
+github.com/kevinburke/go-bindata v0.0.0-20180120195511-46eb4c183bfc/go.mod h1:/pEEZ72flUW2p0yi30bslSp9YqD9pysLxunQDdb2CPM=
 github.com/kevinburke/ssh_config v0.0.0-20180830205328-81db2a75821e/go.mod h1:CT57kijsi8u/K/BOFA39wgDQJ9CxiF4nAY/ojJ6r6mM=
 github.com/kr/pretty v0.1.0 h1:L/CwN0zerZDmRFUapSPitk6f+Q3+0za1rQkzVuMiMFI=
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=
