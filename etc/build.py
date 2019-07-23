@@ -18,6 +18,8 @@ import json
 
 # Packaging variables
 PACKAGE_NAME = "chronograf"
+USER = "chronograf"
+GROUP = "chronograf"
 INSTALL_ROOT_DIR = "/usr/bin"
 LOG_DIR = "/var/log/chronograf"
 DATA_DIR = "/var/lib/chronograf"
@@ -29,6 +31,7 @@ RESOURCES_DIR = "/usr/share/chronograf/resources"
 
 INIT_SCRIPT = "etc/scripts/init.sh"
 SYSTEMD_SCRIPT = "etc/scripts/chronograf.service"
+PREINST_SCRIPT = "etc/scripts/pre-install.sh"
 POSTINST_SCRIPT = "etc/scripts/post-install.sh"
 POSTUNINST_SCRIPT = "etc/scripts/post-uninstall.sh"
 LOGROTATE_SCRIPT = "etc/scripts/logrotate"
@@ -55,21 +58,27 @@ optional_prereqs = [ 'fpm', 'rpmbuild', 'gpg' ]
 fpm_common_args = "-f -s dir --log error \
 --vendor {} \
 --url {} \
+--before-install {} \
 --after-install {} \
 --after-remove {} \
 --license {} \
 --maintainer {} \
 --directories {} \
 --directories {} \
+--rpm-attr 755,{},{}:{} \
+--rpm-attr 755,{},{}:{} \
 --description \"{}\"".format(
      VENDOR,
      PACKAGE_URL,
+     PREINST_SCRIPT,
      POSTINST_SCRIPT,
      POSTUNINST_SCRIPT,
      PACKAGE_LICENSE,
      MAINTAINER,
      LOG_DIR,
      DATA_DIR,
+     USER, GROUP, LOG_DIR,
+     USER, GROUP, DATA_DIR,
      DESCRIPTION)
 
 for f in CONFIGURATION_FILES:
@@ -500,7 +509,7 @@ def build(version=None,
                 return False
         if platform == 'windows':
             target = target + '.exe'
-        build_command += "go build -o {} ".format(os.path.join(outdir, target))
+        build_command += "GO111MODULE=on go build -o {} ".format(os.path.join(outdir, target))
         if race:
             build_command += "-race "
         if len(tags) > 0:

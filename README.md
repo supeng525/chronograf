@@ -112,7 +112,7 @@ alert tracking.
 
 Manage users, roles, permissions for
 [OSS InfluxDB](https://github.com/influxdata/influxdb) and InfluxData's
-[Enterprise](https://docs.influxdata.com/enterprise/v1.6/) product. View
+[Enterprise](https://docs.influxdata.com/enterprise/v1.2/) product. View
 actively running queries and stop expensive queries on the Query Management
 page.
 
@@ -136,7 +136,7 @@ option.
 ## Versions
 
 The most recent version of Chronograf is
-[v1.7.7](https://www.influxdata.com/downloads/).
+[v1.7.11](https://www.influxdata.com/downloads/).
 
 Spotted a bug or have a feature request? Please open
 [an issue](https://github.com/influxdata/chronograf/issues/new)!
@@ -183,9 +183,9 @@ docker pull chronograf:latest
 
 ### From Source
 
-* Chronograf works with go 1.11+, node LTS, and yarn 1.7+.
+* Chronograf works with go 1.10+, node LTS, and yarn 1.5+.
 * Chronograf requires [Kapacitor](https://github.com/influxdata/kapacitor)
-  1.5.x+ to create and store alerts.
+  1.2.x+ to create and store alerts.
 
 1. [Install Go](https://golang.org/doc/install)
 1. [Install Node and NPM](https://nodejs.org/en/download/)

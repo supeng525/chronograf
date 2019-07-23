@@ -24,3 +24,4 @@ canned/apps_gen.go
 npm-debug.log
 yarn-error.log
 ui/.vs/slnx.sqlite
+cmd/chronograf/chronograf-v1.db.lock
